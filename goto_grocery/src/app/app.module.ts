@@ -10,6 +10,8 @@ import { InventoryComponent } from './components/pages/inventory/inventory.compo
 import { MembersComponent } from './components/pages/members/members.component';
 import { SalesComponent } from './components/pages/sales/sales.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddMemberFormComponent } from './components/shared/add-member-form/add-member-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,14 +22,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     InventoryComponent,
     MembersComponent,
     SalesComponent,
-    
+    AddMemberFormComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
