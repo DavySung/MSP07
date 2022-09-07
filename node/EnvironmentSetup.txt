@@ -4,3 +4,5 @@ Node setuo:
 Sequelize setup: https://sequelize.org/docs/v6/getting-started/
 2. Install Sequelize, npm install --save sequelize
 3. Install pg adapter npm install --save pg pg-hstore # Postgres
+
+Alternatively: clone this branch and run `npm install`
