@@ -1,1 +1,39 @@
-<p>sales works!</p>
+<div class="container">
+    <div class=" col-12 py-3 px-3">
+        <div class="d-flex w-100 text-center">
+            <div class="m-auto col-10">
+                <h2 class="text-capitalize">
+                    Sales
+                </h2>
+            </div>
+            <div>
+                <button class="btn btn-primary my-auto me-auto">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div *ngFor="let transaction of transactionList">
+            <div class="card text-white bg-dark my-3 p-2">
+                <div class="d-flex align-items-center">
+                    <div class="card-body">
+                        <p class="mb-0">{{transaction.product_code}} {{transaction.product_code}}</p>
+                    </div>
+                    <div class="my-auto me-auto pe-3">
+                        <button (click)="View(transaction)" class="btn btn-primary mx-2 my-auto me-auto">
+                            View
+                        </button>
+                        <button (click)="Edit(transaction)" class="btn btn-primary mx-2 my-auto me-auto">
+                            Edit
+                        </button>
+                        <button (click)="Delete(transaction)" class="btn btn-primary mx-2 my-auto me-auto">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
