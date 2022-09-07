@@ -9,7 +9,7 @@ import { MainMenuComponent } from './components/shared/main-menu/main-menu.compo
 import { InventoryComponent } from './components/pages/inventory/inventory.component';
 import { MembersComponent } from './components/pages/members/members.component';
 import { SalesComponent } from './components/pages/sales/sales.component';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,11 +19,13 @@ import { SalesComponent } from './components/pages/sales/sales.component';
     MainMenuComponent,
     InventoryComponent,
     MembersComponent,
-    SalesComponent
+    SalesComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
