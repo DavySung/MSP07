@@ -1,6 +1,22 @@
-<div class="">
-    <button class="btn btn-primary" [routerLink]="['']">Home</button>
-    <button class="btn" [routerLink]="['Sales']">Sales</button>
-    <button class="btn" [routerLink]="['Members']">Members</button>
-    <button class="btn" [routerLink]="['Inventory']">Inventory</button>
-</div>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['']">GotoGrocery</a>
+      <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"  aria-controls="navbarNav" >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav" [ngbCollapse]="isCollapsed">
+        <ul class="navbar-nav bg-dark">
+          <li class="nav-item">
+            <button class="btn btn-mm" [routerLink]="['Sales']">Sales</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-mm" [routerLink]="['Members']">Members</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-mm" [routerLink]="['Inventory']">Inventory</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>

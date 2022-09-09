@@ -1,1 +1,116 @@
-<p>sales works!</p>
+<div class="container">
+    <ng-container *ngIf="!createTransaction && !updateTransaction">
+        <div class=" col-12 py-3 px-3">
+            <div class="d-flex w-100 text-center">
+                <div class="m-auto col-10">
+                    <h2 class="text-capitalize">
+                        Sales
+                    </h2>
+                </div>
+                <div>
+                    <button (click)="addMember()" class="btn btn-primary my-auto me-auto">
+                        Add
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div *ngFor="let transaction of transactionList">
+                <div class="card text-white bg-dark my-3 p-2">
+                    <div class="d-flex align-items-center">
+                        <div class="card-body">
+                            <p class="mb-0">{{transaction.product_code}} {{transaction.product_code}}</p>
+                        </div>
+                        <div class="my-auto me-auto pe-3">
+                            <button (click)="view(transaction)" class="btn btn-primary mx-2 my-auto me-auto">
+                                View
+                            </button>
+                            <button (click)="edit(transaction)" class="btn btn-primary mx-2 my-auto me-auto">
+                                Edit
+                            </button>
+                            <button (click)="delete(transaction)" class="btn btn-primary mx-2 my-auto me-auto">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="createTransaction">
+
+        <app-create-transaction-form (exitForm)="exitForm()" (successfulCreateTransaction)="confirmCreate()">
+        </app-create-transaction-form>
+
+    </ng-container>
+    <ng-container *ngIf="updateTransaction">
+        <!-- pass in DTO -->
+        <app-create-transaction-form (exitForm)="exitForm()" (successfulCreateTransaction)="confirmCreate()">
+        </app-create-transaction-form>
+
+    </ng-container>
+</div>
+
+
+<ng-template #viewModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <label class="modal-title" id="modal-basic-title">View Transaction:
+            {{currentTransaction.id}}</label>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body m-0 p-0 text-center">
+        <div class="p-3 pb-0">
+            <div class="row p-3 pb-0">
+                <p>
+                    customer number: {{currentTransaction.customer_number}}
+                </p>
+                <p>
+                    product code: {{currentTransaction.product_code}}
+                </p>
+                <p>
+                    transaction date: {{currentTransaction.transaction_date}}
+                </p>
+                <p>
+                    product price: {{currentTransaction.product_price}}
+                </p>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #deleteModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Delete transaction: {{currentTransaction.id}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span class="" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p class="">Are you sure you want to Delete {{currentTransaction.id}}?<br>
+        </p>
+        <!-- <p>You've been logged out due to inactivity.<br>
+    </p> -->
+    </div>
+    <div class="modal-footer">
+        <button type="btn text-white btn-outline-dark" data-dismiss="modal" (click)="confirmDelete()"
+            (click)="d('Cross click')" class="btn btn-primary">Confirm</button>
+    </div>
+</ng-template>
+
+<ng-template #resultModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{action}} Result</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span class="" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p class="">the {{action}} action has {{actionResult}}<br>
+        </p>
+        <!-- <p>You've been logged out due to inactivity.<br>
+    </p> -->
+    </div>
+</ng-template>
