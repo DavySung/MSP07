@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MemberService } from 'src/app/services/member.service';
-import { MemberDTO } from 'src/app/services/models/MemberDTO';
+import { MemberDTO } from 'src/app/models/MemberDTO';
 
 @Component({
   selector: 'app-members',
