@@ -13,6 +13,7 @@ import { SalesComponent } from './components/pages/sales/sales.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbDateAdapter, NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateTransactionFormComponent } from './components/shared/create-transaction-form/create-transaction-form.component';
+import { UpdateTransactionFormComponent } from './components/shared/update-transaction-form/update-transaction-form.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CreateTransactionFormComponent } from './components/shared/create-trans
     MembersComponent,
     SalesComponent,
     CreateTransactionFormComponent,
+    UpdateTransactionFormComponent,
 
   ],
   imports: [

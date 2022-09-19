@@ -8,7 +8,7 @@
                     </h2>
                 </div>
                 <div>
-                    <button (click)="addMember()" class="btn btn-primary my-auto me-auto">
+                    <button (click)="addTransaction()" class="btn btn-primary my-auto me-auto">
                         Add
                     </button>
                 </div>
@@ -46,8 +46,9 @@
     </ng-container>
     <ng-container *ngIf="updateTransaction">
         <!-- pass in DTO -->
-        <app-create-transaction-form (exitForm)="exitForm()" (successfulCreateTransaction)="confirmCreate()">
-        </app-create-transaction-form>
+        <app-update-transaction-form [transactionDTO]="currentTransaction" (exitForm)="exitForm()"
+            (successfulUpdateTransaction)="confirmUpdate() ">
+        </app-update-transaction-form>
 
     </ng-container>
 </div>

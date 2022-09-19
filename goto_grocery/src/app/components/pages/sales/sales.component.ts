@@ -58,8 +58,8 @@ export class SalesComponent implements OnInit {
     // });
   }
 
-  addMember() {
-    //use MemberRegisterDTO here
+  addTransaction() {
+    //use TransactionRegisterDTO here
     this.createTransaction = true;
   }
 
@@ -69,7 +69,8 @@ export class SalesComponent implements OnInit {
   }
 
   edit(transaction: TransactionDTO) {
-    console.log(transaction);
+    this.currentTransaction = transaction;
+    this.updateTransaction = true;
   }
 
   delete(transaction: TransactionDTO) {
@@ -80,6 +81,10 @@ export class SalesComponent implements OnInit {
 
   confirmCreate() {
     console.log('created transaction')
+  }
+
+  confirmUpdate() {
+    console.log('updated transaction')
   }
 
   confirmDelete() {
