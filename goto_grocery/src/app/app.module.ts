@@ -12,7 +12,8 @@ import { SalesComponent } from './components/pages/sales/sales.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddMemberFormComponent } from './components/shared/add-member-form/add-member-form.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AddInventoryComponent } from './components/pages/add-inventory/add-inventory.component';
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,13 +24,15 @@ import { HttpClientModule } from '@angular/common/http';
     MembersComponent,
     SalesComponent,
     AddMemberFormComponent,
+    AddInventoryComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
   ],

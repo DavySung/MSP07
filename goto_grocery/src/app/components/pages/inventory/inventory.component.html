@@ -6,8 +6,8 @@
                     Inventory
                 </h2>
             </div>
-            <div>
-                <button class="btn btn-primary my-auto me-auto">
+            <div >
+                <button class="btn btn-primary my-auto me-auto" routerLink="/AddInventory">
                     Add
                 </button>
             </div>
@@ -21,19 +21,62 @@
                         <p class="mb-0">{{product.product_name}}</p>
                     </div>
                     <div class="my-auto me-auto pe-3">
-                        <button (click)="View(product)" class="btn btn-primary mx-2 my-auto me-auto">
+                        <button (click)="View(mData)" class="btn btn-primary mx-2 my-auto me-auto">
                             View
                         </button>
                         <button (click)="Edit(product)" class="btn btn-primary mx-2 my-auto me-auto">
                             Edit
                         </button>
-                        <button (click)="Delete(product)" class="btn btn-primary mx-2 my-auto me-auto">
+                        <button (click)="Delete(deleteData, product)" class="btn btn-primary mx-2 my-auto me-auto">
                             Delete
                         </button>
                     </div>
                 </div>
-
+        
             </div>
+
+            <!-- view modal -->
+            <ng-template #mData let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">Inventory</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                      <div [id]="product.id">{{product.id}}</div>
+                      <p>{{product.product_name}}</p>
+                      <p>{{product.product_price}}</p>
+                      <p>{{product.product_desc}}</p>
+                      <p>{{product.created_date}}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
+                </div>
+              </ng-template>
+            
+              <!-- delete modal -->
+            <ng-template #deleteData let-modal>
+                <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Delete {{product.product_code}}</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">×</span>
+                </button>
+                
+                </div>
+                <div class="modal-body">
+                <p><strong>Are you sure you want to delete <span class="text-primary">{{product.product_name}}</span></strong></p>
+                
+                <p>All data related to {{product.product_name}} will be removed permanently.
+                </p>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="modal.close('Delete')">Delete</button>
+                <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Cancel</button>
+                </div>
+            </ng-template>
+
         </div>
     </div>
 </div>
+
