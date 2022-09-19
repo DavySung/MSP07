@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { ProductDTO } from './models/ProductDTO';
+import { ProductDTO } from '../models/ProductDTO';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

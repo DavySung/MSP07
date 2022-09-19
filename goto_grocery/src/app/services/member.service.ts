@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
-import { MemberDTO } from './models/MemberDTO';
+import { MemberDTO } from '../models/MemberDTO';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

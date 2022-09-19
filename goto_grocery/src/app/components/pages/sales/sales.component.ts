@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { TransactionDTO } from 'src/app/services/models/TransactionDTO';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { TransactionDTO } from 'src/app/models/TransactionDTO';
 import { SalesService } from 'src/app/services/sales.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sales',
@@ -8,20 +9,40 @@ import { SalesService } from 'src/app/services/sales.service';
   styleUrls: ['./sales.component.css']
 })
 export class SalesComponent implements OnInit {
+  currentTransaction: TransactionDTO;
   transactionList: TransactionDTO[];
   testTransaction1: TransactionDTO;
   testTransaction2: TransactionDTO;
   isError: boolean;
   message: string;
 
-  constructor(private salesService: SalesService) { }
+  //create
+  createTransaction = false;
+
+  //update
+  updateTransaction = false;
+
+  //result modal
+  actionResult: any;
+  action: string;
+
+  //delete modal
+  record: string;
+  recordId: string;
+
+  @ViewChild('viewModal') viewModal: any;
+  @ViewChild('deleteModal') deleteModal: any;
+  @ViewChild('resultModal') resultModal: any;
+
+  constructor(private salesService: SalesService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.GetTransactions()
+    this.getTransactions()
   }
 
   //get members to display
-  GetTransactions() {
+  getTransactions() {
     //test data
     this.testTransaction1 = { id: 1, customer_number: '1', product_code: 'test1', transaction_date: "1/2", product_price: 123 }
     this.testTransaction2 = { id: 2, customer_number: '2', product_code: 'test2', transaction_date: "1/2", product_price: 123 }
@@ -37,18 +58,69 @@ export class SalesComponent implements OnInit {
     // });
   }
 
-  AddMember() {
-    //use MemberRegisterDTO here
-
+  addTransaction() {
+    //use TransactionRegisterDTO here
+    this.createTransaction = true;
   }
 
-  View(member: TransactionDTO) {
-    console.log(member);
+  view(transaction: TransactionDTO) {
+    this.currentTransaction = transaction;
+    this.open(this.viewModal);
   }
-  Edit(member: TransactionDTO) {
-    console.log(member);
+
+  edit(transaction: TransactionDTO) {
+    this.currentTransaction = transaction;
+    this.updateTransaction = true;
   }
-  Delete(member: TransactionDTO) {
-    console.log(member);
+
+  delete(transaction: TransactionDTO) {
+    this.action = "Delete";
+    this.currentTransaction = transaction;
+    this.open(this.deleteModal);
   }
+
+  confirmCreate() {
+    console.log('created transaction')
+  }
+
+  confirmUpdate() {
+    console.log('updated transaction')
+  }
+
+  confirmDelete() {
+    this.salesService.deleteTransactions(this.currentTransaction).then((response) => {
+      console.log(response)
+      this.actionResult = response.success
+      this.open(this.resultModal)
+    })
+      .catch((err) => {
+        console.log(err);
+        this.actionResult = "failed"
+        this.open(this.resultModal)
+      });
+  }
+
+  exitForm() {
+    this.createTransaction = false;
+    this.updateTransaction = false;
+  }
+
+  //modal components
+  open(content: any) {
+    this.modalService.open(content,
+      {
+        windowClass: 'modal-center'
+      });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 }
