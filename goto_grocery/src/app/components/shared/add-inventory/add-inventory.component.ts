@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from 'src/app/services/inventory.service';
-import { ProductDTO } from 'src/app/services/models/ProductDTO';
+import { ProductDTO } from 'src/app/models/ProductDTO';
 import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-add-inventory',

@@ -9,7 +9,7 @@ import { HomeComponent } from './components/pages/home/home.component';
 import { SalesComponent } from './components/pages/sales/sales.component';
 import { MembersComponent } from './components/pages/members/members.component';
 import { InventoryComponent } from './components/pages/inventory/inventory.component';
-import {AddInventoryComponent} from './components/pages/add-inventory/add-inventory.component';
+import {AddInventoryComponent} from './components/shared/add-inventory/add-inventory.component';
 
 const routes: Routes = [
   {

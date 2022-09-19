@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbDateAdapter, NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreateTransactionFormComponent } from './components/shared/create-transaction-form/create-transaction-form.component';
 import { UpdateTransactionFormComponent } from './components/shared/update-transaction-form/update-transaction-form.component';
-import { AddInventoryComponent } from './components/pages/add-inventory/add-inventory.component';
+import { AddInventoryComponent } from './components/shared/add-inventory/add-inventory.component';
 
 @NgModule({
   declarations: [
@@ -27,9 +27,8 @@ import { AddInventoryComponent } from './components/pages/add-inventory/add-inve
     SalesComponent,
     CreateTransactionFormComponent,
     UpdateTransactionFormComponent,
-    AddMemberFormComponent,
     AddInventoryComponent,
-
+    
   ],
   imports: [
     BrowserModule,
