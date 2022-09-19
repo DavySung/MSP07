@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +10,11 @@ import { MainMenuComponent } from './components/shared/main-menu/main-menu.compo
 import { InventoryComponent } from './components/pages/inventory/inventory.component';
 import { MembersComponent } from './components/pages/members/members.component';
 import { SalesComponent } from './components/pages/sales/sales.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbDateAdapter, NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateTransactionFormComponent } from './components/shared/create-transaction-form/create-transaction-form.component';
+import { UpdateTransactionFormComponent } from './components/shared/update-transaction-form/update-transaction-form.component';
+import { AddInventoryComponent } from './components/pages/add-inventory/add-inventory.component';
 
 @NgModule({
   declarations: [
@@ -20,14 +25,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     InventoryComponent,
     MembersComponent,
     SalesComponent,
-    
+    CreateTransactionFormComponent,
+    UpdateTransactionFormComponent,
+    AddMemberFormComponent,
+    AddInventoryComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
+
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

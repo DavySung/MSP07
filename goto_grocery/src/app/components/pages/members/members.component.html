@@ -1,1 +1,88 @@
-<p>members works!</p>
+<div class="container">
+    <div class=" col-12 py-3 px-3">
+        <div class="d-flex w-100 text-center">
+            <div class="m-auto col-10">
+                <h2 class="text-capitalize">
+                    Member
+                </h2>
+            </div>
+            <div>
+                <button class="btn btn-primary my-auto me-auto">
+                    Add
+                </button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div *ngFor="let member of memberList">
+            <div class="card text-white bg-dark my-3 p-2">
+                <div class="d-flex align-items-center">
+                    <div class="card-body">
+                        <p class="mb-0">{{member.first_name}} {{member.last_name}}</p>
+                    </div>
+                    <div class="my-auto me-auto pe-3">
+                        <button (click)="View(member)" class="btn btn-primary mx-2 my-auto me-auto">
+                            View
+                        </button>
+                        <button (click)="Edit(member)" class="btn btn-primary mx-2 my-auto me-auto">
+                            Edit
+                        </button>
+                        <button (click)="Delete(member)" class="btn btn-primary mx-2 my-auto me-auto">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #viewModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <label class="modal-title" id="modal-basic-title">View Member:
+            {{currentMember.id}}</label>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body m-0 p-0 text-center">
+        <div class="p-3 pb-0">
+            <div class="row p-3 pb-0">
+                <p>
+                    customer number: {{currentMember.customer_number}}
+                </p>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- <ng-template #deleteModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Delete transaction: {{currentTransaction.id}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span class="" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p class="">Are you sure you want to Delete {{currentTransaction.id}}?<br>
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button type="btn text-white btn-outline-dark" data-dismiss="modal" (click)="confirmDelete()"
+            (click)="d('Cross click')" class="btn btn-primary">Confirm</button>
+    </div>
+</ng-template>
+
+<ng-template #resultModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">{{action}} Result</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span class="" aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <p class="">the {{action}} action has {{actionResult}}<br>
+        </p>
+    </div>
+</ng-template> -->
