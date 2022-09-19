@@ -20,16 +20,25 @@ export class SalesService {
             this.http.get<TransactionDTO[]>(`${this.baseURL}/transactions/get`)
         );
     }
+
     //will delete a transaction
     async deleteTransactions(transaction: TransactionDTO) {
         return await firstValueFrom(
             this.http.post<ResponseDTO>(`${this.baseURL}/transactions/delete`, transaction)
         );
     }
+
     //will create a transaction
     async createTransactions(transaction: CreateTransactionDTO) {
         return await firstValueFrom(
             this.http.post<ResponseDTO>(`${this.baseURL}/transactions/create`, transaction)
+        );
+    }
+
+    //will update a transaction
+    async updateTransactions(transaction: TransactionDTO) {
+        return await firstValueFrom(
+            this.http.post<ResponseDTO>(`${this.baseURL}/transactions/update`, transaction)
         );
     }
 

@@ -1,0 +1,42 @@
+<form (ngSubmit)="createTransaction()" [formGroup]="form">
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">Customer Number</label>
+                <input placeholder="" class="form-control" formControlName="customer_number" type="text"
+                    [ngClass]="{'is-invalid': !customer_number?.valid && (customer_number?.dirty || customer_number?.touched || submitted) }" />
+                <small *ngIf="!customer_number?.valid && (customer_number?.dirty || submitted)"
+                    class="text-danger validation-error-message">Customer Number is required</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">Product Code</label>
+                <input placeholder="" class="form-control" formControlName="product_code" type="text"
+                    [ngClass]="{ 'is-invalid': !product_code?.valid && (product_code?.dirty || product_code?.touched || submitted) }" />
+                <small *ngIf="!product_code?.valid && (product_code?.dirty || submitted)"
+                    class="text-danger validation-error-message">Product Code
+                    is required</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <button [disabled]="!form.valid" type="submit" class="btn btn-dark mt-4 w-100">
+            Submit
+        </button>
+        <button (click)="goBack()" class="btn btn-dark mt-4 w-100">
+            Cancel
+        </button>
+    </div>
+
+
+    <ng-container *ngIf="isError">
+        <div class="alert alert-danger my-3" role="alert">
+            {{ errMsg }}
+        </div>
+    </ng-container>
+</form>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MemberService } from 'src/app/services/member.service';
 import { MemberDTO } from 'src/app/models/MemberDTO';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-members',
@@ -8,13 +9,20 @@ import { MemberDTO } from 'src/app/models/MemberDTO';
   styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
+  currentMember: MemberDTO;
   memberList: MemberDTO[];
   testMember1: MemberDTO;
   testMember2: MemberDTO;
   isError: boolean;
   message: string;
 
-  constructor(private memberService: MemberService) { }
+
+  @ViewChild('viewModal') viewModal: any;
+  @ViewChild('deleteModal') deleteModal: any;
+  @ViewChild('resultModal') resultModal: any;
+
+  constructor(private memberService: MemberService,
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.GetMembers()
@@ -44,7 +52,8 @@ export class MembersComponent implements OnInit {
   }
 
   View(member: MemberDTO) {
-    console.log(member);
+    this.currentMember = member;
+    this.open(this.viewModal);
   }
   Edit(member: MemberDTO) {
     console.log(member);
@@ -52,4 +61,23 @@ export class MembersComponent implements OnInit {
   Delete(member: MemberDTO) {
     console.log(member);
   }
+
+  //modal components
+  open(content: any) {
+    this.modalService.open(content,
+      {
+        windowClass: 'modal-center'
+      });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 }
