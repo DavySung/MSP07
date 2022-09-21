@@ -12,16 +12,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Transaction.hasOne(models.Product, {
-        foreignKey: 'productCode',
-        onDelete: 'CASCADE'
+        foreignKey: 'productCode'
       });
       Transaction.hasOne(models.Member, {
-        foreignKey: 'customerNumber',
-        onDelete: 'CASCADE'
+        foreignKey: 'customerNumber'
       });
       Transaction.hasOne(models.ProductPrice, {
-        foreignKey: 'productPriceID',
-        onDelete: 'CASCADE'
+        foreignKey: 'productPriceID'
       });
     }
   }
@@ -33,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
     orderID: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Transaction',
+    modelName: 'Transaction'
   });
   return Transaction;
 };
