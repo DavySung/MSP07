@@ -1,0 +1,40 @@
+table members {
+  id int
+  customer_number varchar(255) [PK]
+  first_name varchar(255)
+  lastname varchar(255)
+  email varchar(255)
+  phone varchar(255)
+  address_first_line varchar(255)
+  address_second_line varchar(255)
+  address_suburb varchar(255)
+  address_state varchar(3)
+  address_postcode varchar(5)
+  account_active_ind bool
+  created_date datetime
+}
+
+table products {
+  id int
+  product_code varchar(12) [PK]
+  product_name varchar(255)
+  product_desc varchar(255)
+  created_date datetime
+}
+
+table product_price{
+  id int [PK]
+  product_code varchar(12) [ref: > products.product_code]
+  product_price decimal
+  product_price_start_date date
+  product_price_end_date date
+}
+
+table transactions {
+  id int [PK]
+  customer_number varchar(255) [ref: > members.customer_number]
+  product_code varchar(12) [ref: > products.product_code]
+  transaction_date datetime
+  product_price_id int [ref: > product_price.id]
+  order_id int
+}
