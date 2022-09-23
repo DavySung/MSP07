@@ -16,11 +16,20 @@ export class CreateTransactionFormComponent implements OnInit {
   errMsg: string;
   submitted: boolean;
 
-  get customer_number() {
-    return this.form.get('customer_number');
+  get customerNumber() {
+    return this.form.get('customerNumber');
   }
-  get product_code() {
-    return this.form.get('product_code');
+  get productCode() {
+    return this.form.get('productCode');
+  }
+  get transactionDate() {
+    return this.form.get('transactionDate');
+  }
+  get productPriceID() {
+    return this.form.get('productPriceID');
+  }
+  get orderID() {
+    return this.form.get('orderID');
   }
 
   constructor(
@@ -31,11 +40,10 @@ export class CreateTransactionFormComponent implements OnInit {
   ngOnInit(): void {
     this.setupForm();
   }
-
   setupForm() {
     this.form = this.formBuilder.group(
       {
-        customer_number: [
+        customerNumber: [
           '',
           Validators.compose([
             Validators.required,
@@ -43,7 +51,29 @@ export class CreateTransactionFormComponent implements OnInit {
             Validators.maxLength(20)
           ]),
         ],
-        product_code: [
+        productCode: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(20)
+          ]),
+        ],
+        transactionDate: [
+          '',
+          Validators.compose([
+            Validators.required,
+          ]),
+        ],
+        productPriceID: [
+          '',
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(20)
+          ]),
+        ],
+        orderID: [
           '',
           Validators.compose([
             Validators.required,
@@ -65,7 +95,7 @@ export class CreateTransactionFormComponent implements OnInit {
       .createTransactions(createForm)
       .then((response) => {
         console.log('Successful Create');
-
+        this.exitForm.emit();
       })
       .catch((response) => {
 

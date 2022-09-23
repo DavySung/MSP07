@@ -18,11 +18,20 @@ export class UpdateTransactionFormComponent implements OnInit {
   errMsg: string;
   submitted: boolean;
 
-  get customer_number() {
-    return this.form.get('customer_number');
+  get customerNumber() {
+    return this.form.get('customerNumber');
   }
-  get product_code() {
-    return this.form.get('product_code');
+  get productCode() {
+    return this.form.get('productCode');
+  }
+  get transactionDate() {
+    return this.form.get('transactionDate');
+  }
+  get productPriceID() {
+    return this.form.get('productPriceID');
+  }
+  get orderID() {
+    return this.form.get('orderID');
   }
 
   constructor(
@@ -37,16 +46,38 @@ export class UpdateTransactionFormComponent implements OnInit {
   setupForm() {
     this.form = this.formBuilder.group(
       {
-        customer_number: [
-          this.transactionDTO.customer_number,
+        customerNumber: [
+          this.transactionDTO.customerNumber,
           Validators.compose([
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(20)
           ]),
         ],
-        product_code: [
-          this.transactionDTO.product_code,
+        productCode: [
+          this.transactionDTO.productCode,
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(20)
+          ]),
+        ],
+        transactionDate: [
+          this.transactionDTO.transactionDate,
+          Validators.compose([
+            Validators.required,
+          ]),
+        ],
+        productPriceID: [
+          this.transactionDTO.productPriceID,
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(20)
+          ]),
+        ],
+        orderID: [
+          this.transactionDTO.orderID,
           Validators.compose([
             Validators.required,
             Validators.minLength(1),
@@ -64,6 +95,7 @@ export class UpdateTransactionFormComponent implements OnInit {
   async createTransaction() {
     this.submitted = true;
     let updatedForm = <TransactionDTO>this.form.value;
+    updatedForm.id = this.transactionDTO.id;
     await this.salesService.
       updateTransactions(updatedForm)
       .then((response) => {

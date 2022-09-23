@@ -1,0 +1,91 @@
+<div class="container">
+ 
+    <h2 class="text-capitalize text-center p-4">
+        Add Inventory
+    </h2>
+      <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata.value)" >
+       
+        <div class="form-group" >
+            <div class="row p-2">
+
+                <div class="col-2">
+                    <label for="product_code">Product Code</label>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control"  formControlName="product_code" id="product_code">
+                </div>
+            </div>
+          
+        </div>
+
+        <div class="form-group">
+            <div class="row p-2">
+
+                <div class="col-2">
+
+                    <label for="product_name">Product Name</label>
+                </div>
+                <div class="col">
+
+                    <input type="text" class="form-control" formControlName="product_name" id="product_name" >
+                </div>
+            </div>
+            
+          </div>
+
+          <div class="form-group">
+            <div class="row p-2">
+
+                <div class="col-2">
+                    <label for="product_price">Product Price</label>
+                </div>
+                <div class="col">
+
+                    <input type="text" class="form-control" formControlName="product_price" id="product_price" >
+                </div>
+            </div>
+            
+            
+          </div>
+
+          <div class="form-group">
+            <div class="row p-2">
+
+                <div class="col-2">
+
+                    <label for="product_desc">Description</label>
+                </div>
+                <div class="col">
+                    <input type="text-area" class="form-control" formControlName="product_desc" id="product_desc" >
+
+                </div>
+            </div>
+            
+          </div>
+
+          <div class="form-group">
+            <div class="row p-2">
+
+                <div class="col-2">
+
+                    <label for="created_date">Create Date</label>
+                </div>
+                <div class="col">
+                    <input type="date" class="form-control" formControlName="created_date" id="createdDate" >
+
+                </div>
+            </div>
+
+            
+          </div>
+
+          <div class="row p5">
+            <div class="col-2"></div>
+            <div class="col"><button type="submit" class="btn btn-success btn-md ">Submit</button></div>
+          </div>
+        
+      </form>
+    </div>
+ 
+
+ 
