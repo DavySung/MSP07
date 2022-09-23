@@ -44,18 +44,19 @@ export class SalesComponent implements OnInit {
   //get members to display
   getTransactions() {
     //test data
-    this.testTransaction1 = { id: 1, customer_number: '1', product_code: 'test1', transaction_date: "1/2", product_price: 123 }
-    this.testTransaction2 = { id: 2, customer_number: '2', product_code: 'test2', transaction_date: "1/2", product_price: 123 }
-    this.transactionList = [this.testTransaction1, this.testTransaction2]
+    // this.testTransaction1 = { id: 1, customer_number: '1', product_code: 'test1', transaction_date: "1/2", product_price: 123 }
+    // this.testTransaction2 = { id: 2, customer_number: '2', product_code: 'test2', transaction_date: "1/2", product_price: 123 }
+    // this.transactionList = [this.testTransaction1, this.testTransaction2]
     //this is use the actual api
-    // this.salesService.getTransactions().then((response) => {
-    //   this.memberList = response;
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   this.isError = true;
-    //   this.message = err;
-    // });
+    this.salesService.getTransactions().then(async (response) => {
+      this.transactionList = response;
+      console.log(response)
+    })
+      .catch((err) => {
+        console.log(err);
+        this.isError = true;
+        this.message = err;
+      });
   }
 
   addTransaction() {

@@ -3,9 +3,9 @@
         <div class="col-12">
             <div class="form-group">
                 <label class="control-label">Customer Number</label>
-                <input placeholder="" class="form-control" formControlName="customer_number" type="text"
-                    [ngClass]="{'is-invalid': !customer_number?.valid && (customer_number?.dirty || customer_number?.touched || submitted) }" />
-                <small *ngIf="!customer_number?.valid && (customer_number?.dirty || submitted)"
+                <input placeholder="" class="form-control" formControlName="customerNumber" type="text"
+                    [ngClass]="{'is-invalid': !customerNumber?.valid && (customerNumber?.dirty || customerNumber?.touched || submitted) }" />
+                <small *ngIf="!customerNumber?.valid && (customerNumber?.dirty || submitted)"
                     class="text-danger validation-error-message">Customer Number is required</small>
             </div>
         </div>
@@ -15,10 +15,48 @@
         <div class="col-12">
             <div class="form-group">
                 <label class="control-label">Product Code</label>
-                <input placeholder="" class="form-control" formControlName="product_code" type="text"
-                    [ngClass]="{ 'is-invalid': !product_code?.valid && (product_code?.dirty || product_code?.touched || submitted) }" />
-                <small *ngIf="!product_code?.valid && (product_code?.dirty || submitted)"
+                <input placeholder="" class="form-control" formControlName="productCode" type="text"
+                    [ngClass]="{ 'is-invalid': !productCode?.valid && (productCode?.dirty || productCode?.touched || submitted) }" />
+                <small *ngIf="!productCode?.valid && (productCode?.dirty || submitted)"
                     class="text-danger validation-error-message">Product Code
+                    is required</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">Product Code</label>
+                <input placeholder="" class="form-control" formControlName="transactionDate" type="date"
+                    placeholder="DD/MM/YY"
+                    [ngClass]="{ 'is-invalid': !transactionDate?.valid && (transactionDate?.dirty || transactionDate?.touched || submitted) }" />
+                <small *ngIf="!transactionDate?.valid && (transactionDate?.dirty || submitted)"
+                    class="text-danger validation-error-message">Product Code
+                    is required</small>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">Product Code</label>
+                <input placeholder="" class="form-control" formControlName="productPriceID" type="number"
+                    [ngClass]="{ 'is-invalid': !productPriceID?.valid && (productPriceID?.dirty || productPriceID?.touched || submitted) }" />
+                <small *ngIf="!productPriceID?.valid && (productPriceID?.dirty || submitted)"
+                    class="text-danger validation-error-message">Product Code
+                    is required</small>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">orderID</label>
+                <input placeholder="" class="form-control" formControlName="orderID" type="number"
+                    [ngClass]="{ 'is-invalid': !orderID?.valid && (orderID?.dirty || orderID?.touched || submitted) }" />
+                <small *ngIf="!orderID?.valid && (orderID?.dirty || submitted)"
+                    class="text-danger validation-error-message">orderID
                     is required</small>
             </div>
         </div>
