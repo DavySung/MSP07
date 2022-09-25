@@ -11,9 +11,9 @@ exports.CreateProductPriceAsync = async (req, res) => {
   } else {
       try {
           await ProductPrice.create({
-              produceCode: req.body.produceCode,
-              producePrice: req.body.producePrice,
-              producePriceStartDate: req.body.producePriceStartDate,
+              productCode: req.body.productCode,
+              productPrice: req.body.productPrice,
+              productPriceStartDate: req.body.productPriceStartDate,
               productPriceEndDate: req.body.productPriceEndDate
           })
           return true;
@@ -31,9 +31,9 @@ exports.UpdateProductPriceAsync = async (req, res) => {
   } else {
       try {
           await ProductPrice.update({
-              produceCode: req.body.produceCode,
-              producePrice: req.body.producePrice,
-              producePriceStartDate: req.body.producePriceStartDate,
+              productCode: req.body.productCode,
+              productPrice: req.body.productPrice,
+              productPriceStartDate: req.body.productPriceStartDate,
               productPriceEndDate: req.body.productPriceEndDate
           }, {
             where: {
