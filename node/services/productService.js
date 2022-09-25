@@ -14,7 +14,7 @@ exports.CreateProductAsync = async (req, res) => {
               productCode: req.body.productCode,
               productName: req.body.productName,
               productDesc: req.body.productDesc,
-              createdDate: req.body.createdDate
+              //createdDate: req.body.createdDate
           })
           return true;
       }
@@ -34,7 +34,7 @@ exports.UpdateProductAsync = async (req, res) => {
               productCode: req.body.productCode,
               productName: req.body.productName,
               productDesc: req.body.productDesc,
-              createdDate: req.body.createdDate
+              //createdDate: req.body.createdDate
           }, {
             where: {
               id: req.body.id
