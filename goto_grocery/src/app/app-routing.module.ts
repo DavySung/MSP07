@@ -10,6 +10,7 @@ import { SalesComponent } from './components/pages/sales/sales.component';
 import { MembersComponent } from './components/pages/members/members.component';
 import { InventoryComponent } from './components/pages/inventory/inventory.component';
 import {AddInventoryComponent} from './components/shared/add-inventory/add-inventory.component';
+import { UpdateInventoryFormComponent } from './components/shared/update-inventory-form/update-inventory-form.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'Members', component: MembersComponent },
       { path: 'Inventory', component: InventoryComponent },
       { path: 'AddInventory', component: AddInventoryComponent},
+      { path: 'UpdateInventoryForm', component: UpdateInventoryFormComponent},
     ]
   },
 ]

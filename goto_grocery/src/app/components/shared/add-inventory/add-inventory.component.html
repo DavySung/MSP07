@@ -4,7 +4,6 @@
         Add Inventory
     </h2>
       <form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata.value)" >
-       
         <div class="form-group" >
             <div class="row p-2">
 
@@ -12,7 +11,14 @@
                     <label for="product_code">Product Code</label>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control"  formControlName="product_code" id="product_code">
+                    <input type="text" class="form-control" formControlName="product_code" id="product_code"
+                    placeholder="12211"
+                    [ngClass]="{ 'is-invalid': submitted && f['product_code'].errors }"
+                    >
+                    
+                    <div *ngIf="submitted && f['product_code'].errors" class="invalid-feedback">
+                        <div *ngIf="f['product_code'].errors['required']">Product Code is required</div>
+                      </div>
                 </div>
             </div>
           
@@ -27,7 +33,13 @@
                 </div>
                 <div class="col">
 
-                    <input type="text" class="form-control" formControlName="product_name" id="product_name" >
+                    <input type="text" class="form-control" formControlName="product_name" id="product_name"
+                    placeholder="Apple"
+                    [ngClass]="{ 'is-invalid': submitted && f['product_name'].errors }" >
+                    <div *ngIf="submitted && f['product_name'].errors" class="invalid-feedback">
+                        <div *ngIf="f['product_name'].errors['required']">Name is required</div>
+                      </div>
+
                 </div>
             </div>
             
@@ -41,7 +53,12 @@
                 </div>
                 <div class="col">
 
-                    <input type="text" class="form-control" formControlName="product_price" id="product_price" >
+                    <input type="text" class="form-control" formControlName="product_price" id="product_price" 
+                    placeholder="21.1 or 20"
+                    [ngClass]="{ 'is-invalid': submitted && f['product_price'].errors }">
+                    <div *ngIf="submitted && f['product_price'].errors" class="invalid-feedback">
+                        <div *ngIf="f['product_price'].errors['required']">Price is required</div>
+                      </div>
                 </div>
             </div>
             
@@ -56,8 +73,12 @@
                     <label for="product_desc">Description</label>
                 </div>
                 <div class="col">
-                    <input type="text-area" class="form-control" formControlName="product_desc" id="product_desc" >
-
+                    <input type="text-area" class="form-control" formControlName="product_desc" id="product_desc"
+                    placeholder="This is a fruit"
+                    [ngClass]="{ 'is-invalid': submitted && f['product_desc'].errors }" >
+                    <div *ngIf="submitted && f['product_desc'].errors" class="invalid-feedback">
+                        <div *ngIf="f['product_desc'].errors['required']">Description is required</div>
+                      </div>
                 </div>
             </div>
             
@@ -71,8 +92,11 @@
                     <label for="created_date">Create Date</label>
                 </div>
                 <div class="col">
-                    <input type="date" class="form-control" formControlName="created_date" id="createdDate" >
-
+                    <input type="date" class="form-control" formControlName="created_date" id="createdDate" 
+                    [ngClass]="{ 'is-invalid': submitted && f['created_date'].errors }">
+                    <div *ngIf="submitted && f['created_date'].errors" class="invalid-feedback">
+                        <div *ngIf="f['created_date'].errors['required']">Date is required</div>
+                      </div>
                 </div>
             </div>
 
@@ -81,7 +105,7 @@
 
           <div class="row p5">
             <div class="col-2"></div>
-            <div class="col"><button type="submit" class="btn btn-success btn-md ">Submit</button></div>
+            <div class="col"><button type="submit" class="btn btn-success btn-md " >Submit</button></div>
           </div>
         
       </form>

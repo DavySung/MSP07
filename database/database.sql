@@ -11,7 +11,7 @@ CREATE TABLE "members" (
   "address_state" varchar(3),
   "address_postcode" varchar(5),
   "account_active_ind" bool,
-  "created_date" datetime
+  "created_date" date
 );
 
 CREATE TABLE "products" (
@@ -19,7 +19,7 @@ CREATE TABLE "products" (
   "product_code" varchar(12) PRIMARY KEY,
   "product_name" varchar(255),
   "product_desc" varchar(255),
-  "created_date" datetime
+  "created_date" date
 );
 
 CREATE TABLE "product_price" (
@@ -31,10 +31,10 @@ CREATE TABLE "product_price" (
 );
 
 CREATE TABLE "transactions" (
-  "id" int[PK],
+  "id" int PRIMARY KEY,
   "customer_number" varchar(255),
   "product_code" varchar(12),
-  "transaction_date" datetime,
+  "transaction_date" date,
   "product_price" decimal
 );
 

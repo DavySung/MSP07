@@ -18,7 +18,7 @@
             <div class="card text-white bg-dark my-3 p-2">
                 <div class="d-flex align-items-center">
                     <div class="card-body">
-                        <p class="mb-0">{{product.product_name}}</p>
+                        <p class="mb-0">{{product.productName}}</p>
                     </div>
                     <div class="my-auto me-auto pe-3">
                         <button (click)="View(mData)" class="btn btn-primary mx-2 my-auto me-auto">
@@ -26,7 +26,6 @@
                         </button>
                         <button (click)="Edit(product)" class="btn btn-primary mx-2 my-auto me-auto">
                             Edit
-                            
                         </button>
                         <button (click)="Delete(deleteData, product)" class="btn btn-primary mx-2 my-auto me-auto">
                             Delete
@@ -39,33 +38,33 @@
             <!-- view modal -->
             <ng-template #mData let-modal>
                 <div class="modal-header">
-                  <h4 class="modal-title" id="modal-basic-title">Inventory</h4>
+                  <h4 class="modal-title" id="modal-basic-title"><div [id]="product.id">ID: {{product.id}}</div></h4>
                   <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                     <span aria-hidden="true">×</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                      <div [id]="product.id">{{product.id}}</div>
-                      <p>{{product.product_name}}</p>
-                      <p>{{product.product_price}}</p>
-                      <p>{{product.product_desc}}</p>
-                      <p>{{product.created_date}}</p>
+                      <p>ProductCode {{product.productCode}}</p>
+                      <p>Name: {{product.productName}}</p>
+                      <p>Price: {{product.productPrice}}</p>
+                      <p>Description: {{product.productDesc}}</p>
+                      <p>CreatedDate: {{product.createdDate}}</p>
                 </div>
               </ng-template>
             
               <!-- delete modal -->
             <ng-template #deleteData let-modal>
                 <div class="modal-header">
-                <h4 class="modal-title" id="modal-basic-title">Delete {{product.product_code}}</h4>
+                <h4 class="modal-title" id="modal-basic-title">Delete {{product.productCode}}</h4>
                 <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
                     <span aria-hidden="true">×</span>
                 </button>
                 
                 </div>
                 <div class="modal-body">
-                <p><strong>Are you sure you want to delete <span class="text-primary">{{product.product_name}}</span></strong></p>
-                
-                <p>All data related to {{product.product_name}} will be removed permanently.
+                <p><strong>Are you sure you want to delete <span class="text-primary">{{product.productName}}</span></strong></p>
+                <p>{{product.id}}</p>
+                <p>All data related to {{product.productName}} will be removed permanently.
                 </p>
                 </div>
                 <div class="modal-footer">
