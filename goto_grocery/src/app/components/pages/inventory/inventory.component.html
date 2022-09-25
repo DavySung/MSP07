@@ -26,6 +26,7 @@
                         </button>
                         <button (click)="Edit(product)" class="btn btn-primary mx-2 my-auto me-auto">
                             Edit
+                            
                         </button>
                         <button (click)="Delete(deleteData, product)" class="btn btn-primary mx-2 my-auto me-auto">
                             Delete
@@ -50,9 +51,6 @@
                       <p>{{product.product_desc}}</p>
                       <p>{{product.created_date}}</p>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" (click)="modal.close('Save click')">Close</button>
-                </div>
               </ng-template>
             
               <!-- delete modal -->
@@ -75,6 +73,8 @@
                 <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Cancel</button>
                 </div>
             </ng-template>
+
+           
 
         </div>
     </div>
