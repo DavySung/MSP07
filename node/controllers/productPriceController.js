@@ -2,7 +2,7 @@ const productPriceService = require('../services/productPriceService.js')
 
 exports.getProductPrices = async(req, res) => {
     try {
-        return res.status(200).send(await productPriceService.GetMembersAsync());
+        return res.status(200).send(await productPriceService.GetProductPricesAsync());
     } catch (error) {
         return res.status(500).send({
             status: false,
@@ -13,7 +13,7 @@ exports.getProductPrices = async(req, res) => {
 
 exports.deleteProductPrice = async (req, res) => {
     try {
-        return res.status(200).send(await productPriceService.DeleteMemberAsync(req, res))
+        return res.status(200).send(await productPriceService.DeleteProductPriceAsync(req, res))
     } catch (error) {
         return res.status(500).send({
             status: false,
@@ -24,7 +24,7 @@ exports.deleteProductPrice = async (req, res) => {
 
 exports.updateProductPrice = async (req, res) => {
     try {
-        return res.status(200).send(await productPriceService.UpdateMemberAsync(req, res))
+        return res.status(200).send(await productPriceService.UpdateProductPriceAsync(req, res))
     } catch (error) {
         return res.status(500).send({
             status: false,
@@ -35,7 +35,7 @@ exports.updateProductPrice = async (req, res) => {
 
 exports.createProductPrice = async (req, res) => {
     try {
-        return res.status(200).send(await productPriceService.CreateMemberAsync(req, res))
+        return res.status(200).send(await productPriceService.CreateProductPriceAsync(req, res))
     } catch (error) {
         return res.status(500).send({
             status: false,
