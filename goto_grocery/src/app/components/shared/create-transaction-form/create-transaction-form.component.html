@@ -27,7 +27,7 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Product Code</label>
+                <label class="control-label">Transaction Date</label>
                 <input placeholder="" class="form-control" formControlName="transactionDate" type="date"
                     placeholder="DD/MM/YY"
                     [ngClass]="{ 'is-invalid': !transactionDate?.valid && (transactionDate?.dirty || transactionDate?.touched || submitted) }" />
@@ -40,7 +40,7 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Product Code</label>
+                <label class="control-label">Product Price Id</label>
                 <input placeholder="" class="form-control" formControlName="productPriceID" type="number"
                     [ngClass]="{ 'is-invalid': !productPriceID?.valid && (productPriceID?.dirty || productPriceID?.touched || submitted) }" />
                 <small *ngIf="!productPriceID?.valid && (productPriceID?.dirty || submitted)"

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TransactionDTO } from 'src/app/models/TransactionDTO';
 import { SalesService } from 'src/app/services/sales.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ResponseDTO } from 'src/app/models/ResponseDTO';
 
 @Component({
   selector: 'app-sales',
@@ -49,8 +50,8 @@ export class SalesComponent implements OnInit {
     // this.transactionList = [this.testTransaction1, this.testTransaction2]
     //this is use the actual api
     this.salesService.getTransactions().then(async (response) => {
-      this.transactionList = response;
-      console.log(response)
+      this.transactionList = response.message;
+      // console.log(response)
     })
       .catch((err) => {
         console.log(err);
@@ -80,12 +81,18 @@ export class SalesComponent implements OnInit {
     this.open(this.deleteModal);
   }
 
-  confirmCreate() {
-    console.log('created transaction')
+  createFinished(response: ResponseDTO) {
+    // console.log(response);
+    this.actionResult = response.message
+    this.open(this.resultModal)
+    this.getTransactions()
   }
 
-  confirmUpdate() {
-    console.log('updated transaction')
+  updateFinished(response: ResponseDTO) {
+    // console.log(response);
+    this.actionResult = response.message
+    this.open(this.resultModal)
+    this.getTransactions()
   }
 
   confirmDelete() {
@@ -93,6 +100,7 @@ export class SalesComponent implements OnInit {
       console.log(response)
       this.actionResult = response.success
       this.open(this.resultModal)
+      this.getTransactions();
     })
       .catch((err) => {
         console.log(err);

@@ -19,7 +19,8 @@
                 <div class="card text-white bg-dark my-3 p-2">
                     <div class="d-flex align-items-center">
                         <div class="card-body">
-                            <p class="mb-0">{{transaction.product_code}} {{transaction.product_code}}</p>
+                            <p class="mb-0">orderID: {{transaction.orderID}} </p>
+                            <p class="mb-0">productCode: {{transaction.productCode}}</p>
                         </div>
                         <div class="my-auto me-auto pe-3">
                             <button (click)="view(transaction)" class="btn btn-primary mx-2 my-auto me-auto">
@@ -40,14 +41,14 @@
     </ng-container>
     <ng-container *ngIf="createTransaction">
 
-        <app-create-transaction-form (exitForm)="exitForm()" (successfulCreateTransaction)="confirmCreate()">
+        <app-create-transaction-form (exitForm)="exitForm()" (response)="createFinished($event)">
         </app-create-transaction-form>
 
     </ng-container>
     <ng-container *ngIf="updateTransaction">
         <!-- pass in DTO -->
         <app-update-transaction-form [transactionDTO]="currentTransaction" (exitForm)="exitForm()"
-            (successfulUpdateTransaction)="confirmUpdate() ">
+            (response)="updateFinished($event)">
         </app-update-transaction-form>
 
     </ng-container>
@@ -66,16 +67,19 @@
         <div class="p-3 pb-0">
             <div class="row p-3 pb-0">
                 <p>
-                    customer number: {{currentTransaction.customer_number}}
+                    customer number: {{currentTransaction.customerNumber}}
                 </p>
                 <p>
-                    product code: {{currentTransaction.product_code}}
+                    product code: {{currentTransaction.productCode}}
                 </p>
                 <p>
-                    transaction date: {{currentTransaction.transaction_date}}
+                    transaction date: {{currentTransaction.transactionDate}}
                 </p>
                 <p>
-                    product price: {{currentTransaction.product_price}}
+                    product price: {{currentTransaction.productPriceID}}
+                </p>
+                <p>
+                    order ID: {{currentTransaction.orderID}}
                 </p>
             </div>
         </div>
@@ -109,7 +113,7 @@
         </button>
     </div>
     <div class="modal-body text-center">
-        <p class="">the {{action}} action has {{actionResult}}<br>
+        <p class="">{{actionResult}}<br>
         </p>
         <!-- <p>You've been logged out due to inactivity.<br>
     </p> -->

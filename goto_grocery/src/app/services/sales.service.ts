@@ -22,7 +22,7 @@ export class SalesService {
         });
         let options = { headers: headers };
         return await firstValueFrom(
-            this.http.get<TransactionDTO[]>(`${this.baseURL}/transactions/get`, options)
+            this.http.get<ResponseDTO>(`${this.baseURL}/transactions/get`, options)
         );
     }
 
