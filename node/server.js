@@ -4,6 +4,9 @@ const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const memberRoutes = require('./routes/memberRoutes.js')
 const transactionRoutes = require('./routes/transactionRoutes.js')
+const productRoutes = require('./routes/productRoutes.js')
+const productPriceRoutes = require('./routes/productPriceRoutes.js')
+
 const cors = require('cors');
 
 const app = express();
@@ -26,5 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api/members', memberRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/products', productRoutes)
+app.use('/api/productPrice', productPriceRoutes)
 
 app.listen(port, () => console.log(`Server started on ${port}`));
