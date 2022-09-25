@@ -27,12 +27,12 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Product Code</label>
+                <label class="control-label">Transaction Date</label>
                 <input placeholder="" class="form-control" formControlName="transactionDate" type="date"
                     placeholder="DD/MM/YY"
                     [ngClass]="{ 'is-invalid': !transactionDate?.valid && (transactionDate?.dirty || transactionDate?.touched || submitted) }" />
                 <small *ngIf="!transactionDate?.valid && (transactionDate?.dirty || submitted)"
-                    class="text-danger validation-error-message">Product Code
+                    class="text-danger validation-error-message">Transaction Date
                     is required</small>
             </div>
         </div>

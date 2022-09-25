@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SalesService } from 'src/app/services/sales.service';
 import { TransactionDTO } from 'src/app/models/TransactionDTO';
+import { formatDate } from '@angular/common';
+import { ResponseDTO } from 'src/app/models/ResponseDTO';
 
 @Component({
   selector: 'app-update-transaction-form',
@@ -10,7 +12,7 @@ import { TransactionDTO } from 'src/app/models/TransactionDTO';
 })
 export class UpdateTransactionFormComponent implements OnInit {
 
-  @Output() successfulCreateTransaction = new EventEmitter();
+  @Output() response = new EventEmitter<ResponseDTO>();
   @Output() exitForm = new EventEmitter();
   @Input() transactionDTO: TransactionDTO;
   form: FormGroup;
@@ -63,7 +65,7 @@ export class UpdateTransactionFormComponent implements OnInit {
           ]),
         ],
         transactionDate: [
-          this.transactionDTO.transactionDate,
+          formatDate(this.transactionDTO.transactionDate, 'yyyy-MM-dd', 'en'),
           Validators.compose([
             Validators.required,
           ]),
@@ -99,10 +101,13 @@ export class UpdateTransactionFormComponent implements OnInit {
     await this.salesService.
       updateTransactions(updatedForm)
       .then((response) => {
-        console.log('Successful Create');
+        this.response.emit(response)
+        this.exitForm.emit();
       })
       .catch((response) => {
-
+        console.log('Failed Create');
+        this.response.emit(response)
+        this.exitForm.emit();
       });
   }
 }

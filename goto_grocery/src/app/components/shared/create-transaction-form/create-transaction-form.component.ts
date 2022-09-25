@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SalesService } from 'src/app/services/sales.service';
 import { CreateTransactionDTO } from 'src/app/models/CreateTransactionDTO';
+import { ResponseDTO } from 'src/app/models/ResponseDTO';
 
 @Component({
   selector: 'app-create-transaction-form',
@@ -9,7 +10,7 @@ import { CreateTransactionDTO } from 'src/app/models/CreateTransactionDTO';
   styleUrls: ['./create-transaction-form.component.css']
 })
 export class CreateTransactionFormComponent implements OnInit {
-  @Output() successfulCreateTransaction = new EventEmitter();
+  @Output() response = new EventEmitter<ResponseDTO>();
   @Output() exitForm = new EventEmitter();
   form: FormGroup;
   isError: boolean;
@@ -95,10 +96,14 @@ export class CreateTransactionFormComponent implements OnInit {
       .createTransactions(createForm)
       .then((response) => {
         console.log('Successful Create');
+        console.log(response);
+        this.response.emit(response)
         this.exitForm.emit();
       })
       .catch((response) => {
-
+        console.log('Failed Create');
+        this.response.emit(response)
+        this.exitForm.emit();
       });
   }
 }
