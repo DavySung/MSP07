@@ -7,7 +7,7 @@ module.exports = {
       customerNumber: '12345678',
       productCode: 'A1',
       transactionDate: new Date(),
-      productPriceID: 1,
+      price: 19.9,
       orderID: 118,
       createdAt: new Date(),
       updatedAt: new Date()
