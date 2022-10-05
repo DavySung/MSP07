@@ -17,8 +17,8 @@ module.exports = {
       transactionDate: {
         type: Sequelize.DATE
       },
-      productPriceID: {
-        type: Sequelize.INTEGER
+      price: {
+        type: Sequelize.DECIMAL(10,2)
       },
       orderID: {
         type: Sequelize.INTEGER
