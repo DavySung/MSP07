@@ -17,16 +17,13 @@ module.exports = (sequelize, DataTypes) => {
       Transaction.hasOne(models.Member, {
         foreignKey: 'customerNumber'
       });
-      Transaction.hasOne(models.ProductPrice, {
-        foreignKey: 'productPriceID'
-      });
     }
   }
   Transaction.init({
     customerNumber: DataTypes.STRING,
     productCode: DataTypes.STRING,
     transactionDate: DataTypes.DATE,
-    productPriceID: DataTypes.INTEGER,
+    price: Sequelize.DECIMAL(10,2),
     orderID: DataTypes.INTEGER
   }, {
     sequelize,
