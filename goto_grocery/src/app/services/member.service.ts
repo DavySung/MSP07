@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { MemberDTO } from '../models/MemberDTO';
+import { MemberRegisterDTO } from '../models/MemberRegisterDTO';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams, } from '@angular/common/http';
 import { ResponseDTO } from '../models/ResponseDTO';
@@ -32,7 +33,7 @@ export class MemberService {
     }
 
     //will create a transaction
-    async createMember(member: MemberDTO) {
+    async createMember(member: MemberRegisterDTO) {
         let headers = new HttpHeaders({
             'Content-Type': 'application/json',
         });

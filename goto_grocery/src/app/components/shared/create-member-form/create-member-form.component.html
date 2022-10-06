@@ -1,12 +1,12 @@
-<form (ngSubmit)="createTransaction()" [formGroup]="form">
+<form (ngSubmit)="createMember()" [formGroup]="form">
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Customer Number</label>
-                <input placeholder="" class="form-control" formControlName="customerNumber" type="text"
-                    [ngClass]="{'is-invalid': !customerNumber?.valid && (customerNumber?.dirty || customerNumber?.touched || submitted) }" />
-                <small *ngIf="!customerNumber?.valid && (customerNumber?.dirty || submitted)"
-                    class="text-danger validation-error-message">Customer Number is required</small>
+                <label class="control-label">First name</label>
+                <input placeholder="" class="form-control" formControlName="firstName" type="text"
+                    [ngClass]="{'is-invalid': !firstName?.valid && (firstName?.dirty || firstName?.touched || submitted) }" />
+                <small *ngIf="!firstName?.valid && (firstName?.dirty || submitted)"
+                    class="text-danger validation-error-message">First name is required</small>
             </div>
         </div>
     </div>
@@ -14,11 +14,11 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Product Code</label>
-                <input placeholder="" class="form-control" formControlName="productCode" type="text"
-                    [ngClass]="{ 'is-invalid': !productCode?.valid && (productCode?.dirty || productCode?.touched || submitted) }" />
-                <small *ngIf="!productCode?.valid && (productCode?.dirty || submitted)"
-                    class="text-danger validation-error-message">Product Code
+                <label class="control-label">Last Name</label>
+                <input placeholder="" class="form-control" formControlName="lastName" type="text"
+                    [ngClass]="{ 'is-invalid': !lastName?.valid && (lastName?.dirty || lastName?.touched || submitted) }" />
+                <small *ngIf="!lastName?.valid && (lastName?.dirty || submitted)"
+                    class="text-danger validation-error-message">Last Name
                     is required</small>
             </div>
         </div>
@@ -27,12 +27,12 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Transaction Date</label>
-                <input placeholder="" class="form-control" formControlName="transactionDate" type="date"
-                    placeholder="DD/MM/YY"
-                    [ngClass]="{ 'is-invalid': !transactionDate?.valid && (transactionDate?.dirty || transactionDate?.touched || submitted) }" />
-                <small *ngIf="!transactionDate?.valid && (transactionDate?.dirty || submitted)"
-                    class="text-danger validation-error-message">Product Code
+                <label class="control-label">Email</label>
+                <input placeholder="" class="form-control" formControlName="email" type="email"
+                    placeholder="example@example.com"
+                    [ngClass]="{ 'is-invalid': !email?.valid && (email?.dirty || email?.touched || submitted) }" />
+                <small *ngIf="!email?.valid && (email?.dirty || submitted)"
+                    class="text-danger validation-error-message">Email
                     is required</small>
             </div>
         </div>
@@ -40,11 +40,11 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Product Price Id</label>
-                <input placeholder="" class="form-control" formControlName="productPriceID" type="number"
-                    [ngClass]="{ 'is-invalid': !productPriceID?.valid && (productPriceID?.dirty || productPriceID?.touched || submitted) }" />
-                <small *ngIf="!productPriceID?.valid && (productPriceID?.dirty || submitted)"
-                    class="text-danger validation-error-message">Product Code
+                <label class="control-label">Phone</label>
+                <input placeholder="" class="form-control" formControlName="phone" type="tel"
+                    [ngClass]="{ 'is-invalid': !phone?.valid && (phone?.dirty || phone?.touched || submitted) }" />
+                <small *ngIf="!phone?.valid && (phone?.dirty || submitted)"
+                    class="text-danger validation-error-message">Phone
                     is required</small>
             </div>
         </div>
@@ -52,16 +52,60 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">orderID</label>
-                <input placeholder="" class="form-control" formControlName="orderID" type="number"
-                    [ngClass]="{ 'is-invalid': !orderID?.valid && (orderID?.dirty || orderID?.touched || submitted) }" />
-                <small *ngIf="!orderID?.valid && (orderID?.dirty || submitted)"
-                    class="text-danger validation-error-message">orderID
+                <label class="control-label">Address First Line</label>
+                <input placeholder="" class="form-control" formControlName="addressFirstLine" type="text"
+                    [ngClass]="{ 'is-invalid': !addressFirstLine?.valid && (addressFirstLine?.dirty || addressFirstLine?.touched || submitted) }" />
+                <small *ngIf="!addressFirstLine?.valid && (addressFirstLine?.dirty || submitted)"
+                    class="text-danger validation-error-message">Address
                     is required</small>
             </div>
         </div>
     </div>
-
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">Address Second Line</label>
+                <input placeholder="" class="form-control" formControlName="addressSecondLine" type="text"
+                    [ngClass]="{ 'is-invalid': !addressSecondLine?.valid && (addressSecondLine?.dirty || addressSecondLine?.touched || submitted) }" />
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">Address Suburb</label>
+                <input placeholder="" class="form-control" formControlName="addressSuburb" type="text"
+                    [ngClass]="{ 'is-invalid': !addressSuburb?.valid && (addressSuburb?.dirty || addressSuburb?.touched || submitted) }" />
+                <small *ngIf="!addressSuburb?.valid && (addressSuburb?.dirty || submitted)"
+                    class="text-danger validation-error-message">Suburb
+                    is required</small>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">Address State</label>
+                <input placeholder="" class="form-control" formControlName="addressState" type="text"
+                    [ngClass]="{ 'is-invalid': !addressState?.valid && (addressState?.dirty || addressState?.touched || submitted) }" />
+                <small *ngIf="!addressState?.valid && (addressState?.dirty || submitted)"
+                    class="text-danger validation-error-message">State
+                    is required</small>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label">Address Postcode</label>
+                <input placeholder="" class="form-control" formControlName="addressPostcode" type="text"
+                    [ngClass]="{ 'is-invalid': !addressPostcode?.valid && (addressPostcode?.dirty || addressPostcode?.touched || submitted) }" />
+                <small *ngIf="!addressPostcode?.valid && (addressPostcode?.dirty || submitted)"
+                    class="text-danger validation-error-message">Postcode
+                    is required</small>
+            </div>
+        </div>
+    </div>
     <div class="col-12">
         <button [disabled]="!form.valid" type="submit" class="btn btn-dark mt-4 w-100">
             Submit

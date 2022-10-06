@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "postgres",
+    "username": "root",
     "password": "IcK2Pwftok97k0Hr",
     "database": "node_development",
     "host": "127.0.0.1",
@@ -8,7 +8,7 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "postgres",
+    "username": "root",
     "password": "IcK2Pwftok97k0Hr",
     "database": "node_test",
     "host": "127.0.0.1",
@@ -16,7 +16,7 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "postgres",
+    "username": "root",
     "password": "IcK2Pwftok97k0Hr",
     "database": "node_production",
     "host": "127.0.0.1",
