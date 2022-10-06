@@ -3,7 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { MemberDTO } from '../models/MemberDTO';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams, } from '@angular/common/http';
-
+import { ResponseDTO } from '../models/ResponseDTO';
 
 @Injectable({
     providedIn: 'root',
@@ -16,8 +16,40 @@ export class MemberService {
     //will return all the members from backend
     async getMembersDetails() {
         return await firstValueFrom(
-            this.http.get<MemberDTO[]>(`${this.baseURL}/getMembers`)
+            this.http.get<MemberDTO[]>(`${this.baseURL}/members/get`)
         );
     }
 
+    //will delete a transaction
+    async deleteMember(member: MemberDTO) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        let options = { headers: headers };
+        return await firstValueFrom(
+            this.http.post<ResponseDTO>(`${this.baseURL}/members/delete`, member, options)
+        );
+    }
+
+    //will create a transaction
+    async createMember(member: MemberDTO) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        let options = { headers: headers };
+        return await firstValueFrom(
+            this.http.post<ResponseDTO>(`${this.baseURL}/members/create`, member, options)
+        );
+    }
+
+    //will update a transaction
+    async updateMember(member: MemberDTO) {
+        let headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+        });
+        let options = { headers: headers };
+        return await firstValueFrom(
+            this.http.post<ResponseDTO>(`${this.baseURL}/members/update`, member, options)
+        );
+    }
 }

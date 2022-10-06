@@ -1,11 +1,12 @@
 export interface MemberRegisterDTO {
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     phone: string;
-    address_1: string;
-    address_2: string;
-    address_suburb: string;
-    address_state: string;
-    address_postcode: string;
+    addressFirstLine: string;
+    addressSecondLine: string;
+    addressSuburb: string;
+    addressState: string;
+    addressPostcode: Number;
+    accountActiveIndicator: string;
 }

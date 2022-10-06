@@ -15,6 +15,8 @@ import { NgbDateAdapter, NgbDateParserFormatter, NgbModule } from '@ng-bootstrap
 import { CreateTransactionFormComponent } from './components/shared/create-transaction-form/create-transaction-form.component';
 import { UpdateTransactionFormComponent } from './components/shared/update-transaction-form/update-transaction-form.component';
 import { AddInventoryComponent } from './components/shared/add-inventory/add-inventory.component';
+import { CreateMemberFormComponent } from './components/shared/create-member-form/create-member-form.component';
+import { UpdateMemberFormComponent } from './components/shared/update-member-form/update-member-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { AddInventoryComponent } from './components/shared/add-inventory/add-inv
     CreateTransactionFormComponent,
     UpdateTransactionFormComponent,
     AddInventoryComponent,
+    CreateMemberFormComponent,
+    UpdateMemberFormComponent,
     
   ],
   imports: [

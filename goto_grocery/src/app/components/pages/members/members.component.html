@@ -1,41 +1,55 @@
 <div class="container">
-    <div class=" col-12 py-3 px-3">
-        <div class="d-flex w-100 text-center">
-            <div class="m-auto col-10">
-                <h2 class="text-capitalize">
-                    Member
-                </h2>
-            </div>
-            <div>
-                <button class="btn btn-primary my-auto me-auto">
-                    Add
-                </button>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div *ngFor="let member of memberList">
-            <div class="card text-white bg-dark my-3 p-2">
-                <div class="d-flex align-items-center">
-                    <div class="card-body">
-                        <p class="mb-0">{{member.first_name}} {{member.last_name}}</p>
-                    </div>
-                    <div class="my-auto me-auto pe-3">
-                        <button (click)="View(member)" class="btn btn-primary mx-2 my-auto me-auto">
-                            View
-                        </button>
-                        <button (click)="Edit(member)" class="btn btn-primary mx-2 my-auto me-auto">
-                            Edit
-                        </button>
-                        <button (click)="Delete(member)" class="btn btn-primary mx-2 my-auto me-auto">
-                            Delete
-                        </button>
-                    </div>
+    <ng-container *ngIf="!createMember && !updateMember">
+        <div class=" col-12 py-3 px-3">
+            <div class="d-flex w-100 text-center">
+                <div class="m-auto col-10">
+                    <h2 class="text-capitalize">
+                        Member
+                    </h2>
                 </div>
-
+                <div>
+                    <button (click)="addMember()" class="btn btn-primary my-auto me-auto">
+                        Add
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+        <div>
+            <div *ngFor="let member of memberList">
+                <div class="card text-white bg-dark my-3 p-2">
+                    <div class="d-flex align-items-center">
+                        <div class="card-body">
+                            <p class="mb-0">{{member.firstName}} {{member.lastName}}</p>
+                        </div>
+                        <div class="my-auto me-auto pe-3">
+                            <button (click)="view(member)" class="btn btn-primary mx-2 my-auto me-auto">
+                                View
+                            </button>
+                            <button (click)="edit(member)" class="btn btn-primary mx-2 my-auto me-auto">
+                                Edit
+                            </button>
+                            <button (click)="delete(member)" class="btn btn-primary mx-2 my-auto me-auto">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="createMember">
+
+        <app-create-member-form (exitForm)="exitForm()" (response)="createFinished($event)">
+        </app-create-member-form>
+
+    </ng-container>
+    <ng-container *ngIf="updateMember">
+        <!-- pass in DTO -->
+        <app-update-member-form [memberDTO]="currentMember" (exitForm)="exitForm()" (response)="updateFinished($event)">
+        </app-update-member-form>
+
+    </ng-container>
 </div>
 
 <ng-template #viewModal let-c="close" let-d="dismiss">
@@ -50,7 +64,7 @@
         <div class="p-3 pb-0">
             <div class="row p-3 pb-0">
                 <p>
-                    customer number: {{currentMember.customer_number}}
+                    customer number: {{currentMember.customerNumber}}
                 </p>
             </div>
         </div>

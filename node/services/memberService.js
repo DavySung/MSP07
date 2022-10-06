@@ -5,91 +5,80 @@ exports.GetMembersAsync = async (req, res) => {
   return await Members.findAll();
 }
 
-//get a member by their id
-/*
-exports.GetMemberAsync = async (req, res) => {
-  return await Members.findAll({
-    where: {
-      id: req.params.id
-    }
-  })
-}
-*/
-
 exports.CreateMemberAsync = async (req, res) => {
   if (!req) {
-      return false;
+    return false;
   } else {
-      try {
-          await Members.create({
-              customerNumber: req.body.customerNumber,
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-              email: req.body.email,
-              phone: req.body.phone,
-              addressFirstLine: req.body.addressFirstLine,
-              addressSecondLine: req.body.addressSecondLine,
-              addressSuburb: req.body.addressSuburb,
-              addressState: req.body.addressState,
-              addressPostcode: req.body.addressPostcode,
-              accountActiveIndicator: req.body.accountActiveIndicator
-          })
-          return true;
-      }
-      catch (error) {
-          console.log(`Error: ${error}`);
-          return false;
-      }
+    try {
+      await Members.create({
+        customerNumber: req.body.customerNumber,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+        addressFirstLine: req.body.addressFirstLine,
+        addressSecondLine: req.body.addressSecondLine,
+        addressSuburb: req.body.addressSuburb,
+        addressState: req.body.addressState,
+        addressPostcode: req.body.addressPostcode,
+        accountActiveIndicator: req.body.accountActiveIndicator
+      })
+      return true;
+    }
+    catch (error) {
+      console.log(`Error: ${error}`);
+      return false;
+    }
   }
 }
 
 exports.UpdateMemberAsync = async (req, res) => {
   if (!req) {
-      return false;
+    return false;
   } else {
-      try {
-          await Members.update({
-              customerNumber: req.body.customerNumber,
-              firstName: req.body.firstName,
-              lastName: req.body.lastName,
-              email: req.body.email,
-              phone: req.body.phone,
-              addressFirstLine: req.body.addressFirstLine,
-              addressSecondLine: req.body.addressSecondLine,
-              addressSuburb: req.body.addressSuburb,
-              addressState: req.body.addressState,
-              addressPostcode: req.body.addressPostcode,
-              accountActiveIndicator: req.body.accountActiveIndicator
-          }, {
-            where: {
-              id: req.body.id
-            }
-          })
-          return true;
-      }
-      catch (error) {
-          console.log(`Error: ${error}`);
-          return false;
-      }
+    try {
+      await Members.update({
+        customerNumber: req.body.customerNumber,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+        addressFirstLine: req.body.addressFirstLine,
+        addressSecondLine: req.body.addressSecondLine,
+        addressSuburb: req.body.addressSuburb,
+        addressState: req.body.addressState,
+        addressPostcode: req.body.addressPostcode,
+        accountActiveIndicator: req.body.accountActiveIndicator
+      }, {
+        where: {
+          id: req.body.id
+        }
+      })
+      return true;
+    }
+    catch (error) {
+      console.log(`Error: ${error}`);
+      return false;
+    }
   }
 }
 
 //this will always return true, despite not deleting anything
 exports.DeleteMemberAsync = async (req, res) => {
   if (!req) {
-      return false;
+    return false;
   } else {
-      try {
-          await Members.destroy({
-            where: {
-              id: req.body.id
-            }
-          })
-          return true;
-      }
-      catch (error) {
-          console.log(`Error: ${error}`);
-          return false;
-      }
+    try {
+      await Members.destroy({
+        where: {
+          id: req.body.id
+        }
+      })
+      return true;
+    }
+    catch (error) {
+      console.log(`Error: ${error}`);
+      return false;
+    }
   }
 }

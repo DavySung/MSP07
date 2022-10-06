@@ -1,9 +1,9 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
- 
-     await queryInterface.bulkInsert('Transactions', [{
+  async up(queryInterface, Sequelize) {
+
+    await queryInterface.bulkInsert('Transactions', [{
       customerNumber: '12345678',
       productCode: 'A1',
       transactionDate: new Date(),
@@ -14,8 +14,8 @@ module.exports = {
     }], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     await queryInterface.bulkDelete('Transactions', null, {});
-     
+
   }
 };

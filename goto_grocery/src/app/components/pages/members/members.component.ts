@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MemberService } from 'src/app/services/member.service';
 import { MemberDTO } from 'src/app/models/MemberDTO';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { TransactionDTO } from 'src/app/models/TransactionDTO';
+import { SalesService } from 'src/app/services/sales.service';
+import { ResponseDTO } from 'src/app/models/ResponseDTO';
 
 @Component({
   selector: 'app-members',
@@ -16,6 +19,19 @@ export class MembersComponent implements OnInit {
   isError: boolean;
   message: string;
 
+  //create
+  createMember = false;
+
+  //update
+  updateMember = false;
+
+  //result modal
+  actionResult: any;
+  action: string;
+
+  //delete modal
+  record: string;
+  recordId: string;
 
   @ViewChild('viewModal') viewModal: any;
   @ViewChild('deleteModal') deleteModal: any;
@@ -25,41 +41,73 @@ export class MembersComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.GetMembers()
+    this.getMembers()
   }
 
   //get members to display
-  GetMembers() {
-    //test data
-    this.testMember1 = { id: 1, customer_number: '1', first_name: 'test1', last_name: "test1", email: 'test@email', phone: "5555", address_1: "123", address_2: "123", address_suburb: "123", address_state: "123", address_postcode: 111, created_date: "1/1/1" }
-    this.testMember2 = { id: 2, customer_number: '2', first_name: 'test2', last_name: "test2", email: 'test@email', phone: "5555", address_1: "123", address_2: "123", address_suburb: "123", address_state: "123", address_postcode: 111, created_date: "1/1/1" }
-    this.memberList = [this.testMember1, this.testMember2]
-
-    //this is use the actual api
-    //   this.memberService.getMembersDetails().then((response) => {
-    //   this.memberList = response;
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   this.isError = true;
-    //   this.message = err;
-    // });
+  getMembers() {
+    this.memberService.getMembersDetails().then((response) => {
+      this.memberList = response;
+    })
+      .catch((err) => {
+        console.log(err);
+        this.isError = true;
+        this.message = err;
+      });
   }
 
-  AddMember() {
-    //use MemberRegisterDTO here
-
+  addMember() {
+    //use TransactionRegisterDTO here
+    this.createMember = true;
   }
 
-  View(member: MemberDTO) {
+  view(member: MemberDTO) {
     this.currentMember = member;
     this.open(this.viewModal);
   }
-  Edit(member: MemberDTO) {
-    console.log(member);
+
+  edit(member: MemberDTO) {
+    this.currentMember = member;
+    this.updateMember = true;
   }
-  Delete(member: MemberDTO) {
-    console.log(member);
+
+  delete(member: MemberDTO) {
+    this.action = "Delete";
+    this.currentMember = member;
+    this.open(this.deleteModal);
+  }
+
+  createFinished(response: ResponseDTO) {
+    // console.log(response);
+    this.actionResult = response.message
+    this.open(this.resultModal)
+    this.getMembers()
+  }
+
+  updateFinished(response: ResponseDTO) {
+    // console.log(response);
+    this.actionResult = response.message
+    this.open(this.resultModal)
+    this.getMembers()
+  }
+
+  confirmDelete() {
+    this.memberService.deleteMember(this.currentMember).then((response) => {
+      console.log(response)
+      this.actionResult = response.success
+      this.open(this.resultModal)
+      this.getMembers();
+    })
+      .catch((err) => {
+        console.log(err);
+        this.actionResult = "failed"
+        this.open(this.resultModal)
+      });
+  }
+
+  exitForm() {
+    this.createMember = false;
+    this.updateMember = false;
   }
 
   //modal components
