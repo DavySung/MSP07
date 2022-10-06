@@ -75,7 +75,8 @@ exports.UpdateMemberAsync = async (req, res) => {
     return false;
   } else {
     try {
-      await Members.update({
+      let member = {
+        //should customerNumber be allowed to be updated?
         customerNumber: req.body.customerNumber,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -87,7 +88,11 @@ exports.UpdateMemberAsync = async (req, res) => {
         addressState: req.body.addressState,
         addressPostcode: req.body.addressPostcode,
         accountActiveIndicator: req.body.accountActiveIndicator
-      }, {
+      }
+      let valid = validateMember(member);
+      if(valid !== "OK")
+        throw(valid)
+      await Members.update(member, {
         where: {
           id: req.body.id
         }
