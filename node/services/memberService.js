@@ -11,7 +11,7 @@ exports.CreateMemberAsync = async (req, res) => {
   } else {
     try {
       await Members.create({
-        customerNumber: req.body.customerNumber,
+        customerNumber: "1",
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,

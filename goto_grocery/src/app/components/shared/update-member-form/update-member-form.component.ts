@@ -19,20 +19,32 @@ export class UpdateMemberFormComponent implements OnInit {
   errMsg: string;
   submitted: boolean;
 
-  get customerNumber() {
-    return this.form.get('customerNumber');
+  get firstName() {
+    return this.form.get('firstName');
   }
-  get productCode() {
-    return this.form.get('productCode');
+  get lastName() {
+    return this.form.get('lastName');
   }
-  get transactionDate() {
-    return this.form.get('transactionDate');
+  get email() {
+    return this.form.get('email');
   }
-  get productPriceID() {
-    return this.form.get('productPriceID');
+  get phone() {
+    return this.form.get('phone');
   }
-  get orderID() {
-    return this.form.get('orderID');
+  get addressFirstLine() {
+    return this.form.get('addressFirstLine');
+  }
+  get addressSecondLine() {
+    return this.form.get('addressSecondLine');
+  }
+  get addressSuburb() {
+    return this.form.get('addressSuburb');
+  }
+  get addressState() {
+    return this.form.get('addressState');
+  }
+  get addressPostcode() {
+    return this.form.get('addressPostcode');
   }
 
   constructor(
@@ -47,42 +59,74 @@ export class UpdateMemberFormComponent implements OnInit {
   setupForm() {
     this.form = this.formBuilder.group(
       {
-        customerNumber: [
-          this.memberDTO.customerNumber,
+        firstName: [
+          this.memberDTO.firstName ?? "",
           Validators.compose([
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(20)
           ]),
         ],
-        productCode: [
-          this.memberDTO.productCode,
+        lastName: [
+          this.memberDTO.lastName ?? "",
           Validators.compose([
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(20)
           ]),
         ],
-        transactionDate: [
-          formatDate(this.memberDTO.transactionDate, 'yyyy-MM-dd', 'en'),
+        email: [
+          this.memberDTO.email ?? "",
           Validators.compose([
             Validators.required,
+            Validators.email
           ]),
         ],
-        productPriceID: [
-          this.memberDTO.productPriceID,
+        phone: [
+          this.memberDTO.phone ?? "",
           Validators.compose([
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(20)
           ]),
         ],
-        orderID: [
-          this.memberDTO.orderID,
+        addressFirstLine: [
+          this.memberDTO.addressFirstLine ?? "",
           Validators.compose([
             Validators.required,
             Validators.minLength(1),
             Validators.maxLength(20)
+          ]),
+        ],
+        addressSecondLine: [
+          this.memberDTO.addressSecondLine ?? "",
+          Validators.compose([
+            Validators.minLength(1),
+            Validators.maxLength(20)
+          ]),
+        ],
+        addressSuburb: [
+          this.memberDTO.addressSuburb ?? "",
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(20)
+          ]),
+        ],
+        addressState: [
+          this.memberDTO.addressState ?? "",
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(5)
+          ]),
+        ],
+        addressPostcode: [
+          this.memberDTO.addressPostcode ?? "",
+          Validators.compose([
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(4)
           ]),
         ],
       }
@@ -93,7 +137,7 @@ export class UpdateMemberFormComponent implements OnInit {
     this.exitForm.emit();
   }
 
-  async createTransaction() {
+  async updateMember() {
     this.submitted = true;
     let updatedForm = <MemberDTO>this.form.value;
     updatedForm.id = this.memberDTO.id;
