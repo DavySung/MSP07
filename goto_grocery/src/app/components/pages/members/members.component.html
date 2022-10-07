@@ -64,22 +64,52 @@
         <div class="p-3 pb-0">
             <div class="row p-3 pb-0">
                 <p>
+                    id: {{currentMember.id}}
+                </p>
+                <p>
                     customer number: {{currentMember.customerNumber}}
+                </p>
+                <p>
+                    first name: {{currentMember.firstName}}
+                </p>
+                <p>
+                    last name: {{currentMember.lastName}}
+                </p>
+                <p>
+                    email: {{currentMember.email}}
+                </p>
+                <p>
+                    phone: {{currentMember.phone}}
+                </p>
+                <p>
+                    address first line: {{currentMember.addressFirstLine}}
+                </p>
+                <p>
+                    address second line: {{currentMember.addressSecondLine}}
+                </p>
+                <p>
+                    suburb: {{currentMember.addressSuburb}}
+                </p>
+                <p>
+                    state: {{currentMember.addressState}}
+                </p>
+                <p>
+                    postcode: {{currentMember.addressPostcode}}
                 </p>
             </div>
         </div>
     </div>
 </ng-template>
 
-<!-- <ng-template #deleteModal let-c="close" let-d="dismiss">
+<ng-template #deleteModal let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Delete transaction: {{currentTransaction.id}}</h4>
+        <h4 class="modal-title">Delete member: {{currentMember.id}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span class="" aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body text-center">
-        <p class="">Are you sure you want to Delete {{currentTransaction.id}}?<br>
+        <p class="">Are you sure you want to Delete {{currentMember.firstName}} {{currentMember.lastName}} - {{currentMember.id}}?<br>
         </p>
     </div>
     <div class="modal-footer">
@@ -96,7 +126,7 @@
         </button>
     </div>
     <div class="modal-body text-center">
-        <p class="">the {{action}} action has {{actionResult}}<br>
+        <p class="">Action completed<br>
         </p>
     </div>
-</ng-template> -->
+</ng-template>

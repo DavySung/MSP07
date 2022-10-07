@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MemberService } from 'src/app/services/member.service';
 import { MemberDTO } from 'src/app/models/MemberDTO';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { TransactionDTO } from 'src/app/models/TransactionDTO';
-import { SalesService } from 'src/app/services/sales.service';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
 
 @Component({
@@ -57,7 +55,6 @@ export class MembersComponent implements OnInit {
   }
 
   addMember() {
-    //use TransactionRegisterDTO here
     this.createMember = true;
   }
 
@@ -72,7 +69,6 @@ export class MembersComponent implements OnInit {
   }
 
   delete(member: MemberDTO) {
-    this.action = "Delete";
     this.currentMember = member;
     this.open(this.deleteModal);
   }
