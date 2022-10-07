@@ -3,7 +3,7 @@
     <h2 class="text-capitalize text-center p-4">
         Update Inventory
     </h2>
-      <form formGroup="form" ng_submit="Update(form.value)">
+      <form  (ngSubmit)="Update(formdata.value)" formGroup="formdata">
        
         <div class="form-group" >
             <div class="row p-2">
@@ -12,7 +12,7 @@
                     <label for="product_code">Product Code</label>
                 </div>
                 <div class="col">
-                    <input type="text" class="form-control"  formControlName="product_code" id="product_code">
+                    <input type="text" class="form-control"  formControlName="productCode" id="productCode">
                 </div>
             </div>
           
@@ -84,8 +84,12 @@
             <div class="col"><button type="submit" class="btn btn-success btn-md ">Update</button></div>
           </div>
         
-      </form>
+        </form>
+      
     </div>
- 
+
+    <div>
+        {{this.inventoryService.inventory.productCode}}
+    </div>
 
  

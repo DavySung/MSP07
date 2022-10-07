@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { ProductDTO } from 'src/app/models/ProductDTO';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
@@ -13,12 +12,23 @@ import { Router } from '@angular/router';
 export class InventoryComponent implements OnInit {
   productList: ProductDTO[];
   product: ProductDTO;
+  UpdateProduct: ProductDTO;
+ // productPrice: ProductPriceDTO;
   isError: boolean;
   message: string;
   destroy$: Subject<boolean> = new Subject<boolean>();
+
+  get data(): ProductDTO {
+    return this.inventoryService.inventory;
+  }
+  set data(value: ProductDTO) {
+    this.inventoryService.inventory= value;
+  }
+  
   constructor(private inventoryService: InventoryService, private modalService: NgbModal, private router: Router) { }
 
   ngOnInit(): void {
+    
     this.GetInventory();
   }
 
@@ -45,9 +55,10 @@ export class InventoryComponent implements OnInit {
     })
   }
 
-  Edit(product: ProductDTO) {
-    console.log(product);
-    this.router.navigate(['/UpdateInventoryForm']);
+  Edit(thisProduct: ProductDTO) {
+    this.inventoryService.inventory = thisProduct;
+    console.log(thisProduct);
+   this.router.navigate(['/UpdateInventoryForm']);
   }
 
   //Modal

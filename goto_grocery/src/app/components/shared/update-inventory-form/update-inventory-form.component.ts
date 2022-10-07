@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { ProductDTO } from 'src/app/models/ProductDTO';
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-
+import { FormGroup, FormControl, FormBuilder,  Validators, AbstractControl } from '@angular/forms';
 @Component({
   selector: 'app-update-inventory-form',
   templateUrl: './update-inventory-form.component.html',
@@ -12,47 +11,68 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 export class UpdateInventoryFormComponent implements OnInit {
 
   newProduct: ProductDTO;
-  formdata: any;
-  updateForm: any;
+  formdata: FormGroup;
+ // updateForm: any;
   submitted: boolean = false;
+  
+  @Input() UpdateProduct: ProductDTO;
+  @Output() updateChange:EventEmitter<ProductDTO> =new EventEmitter<ProductDTO>();
+  get productCode() {
+    return this.formdata.get('productCode');
+  }
 
-  constructor(private inventoryService: InventoryService) {
-    
+  get data(): ProductDTO {
+    return this.inventoryService.inventory;
+  }
+  set data(value: ProductDTO) {
+    this.inventoryService.inventory= value;
+  }
+
+  constructor(public formBuilder: FormBuilder,public inventoryService: InventoryService) {
    
   }
   
   ngOnInit(): void {
-   this.LoadForm();
-
+    this.LoadForm()
+ //  console.log(this.UpdateProduct)
   }
 
-  LoadForm(){
-    this.formdata = new FormGroup({
-      product_code: new FormControl("", [
+  
+
+  LoadForm( ){
+   console.log(this.inventoryService.inventory)
+   
+    this.formdata = this.formBuilder.group({
+      productCode:  [this.inventoryService.inventory.productCode, Validators.compose([
+
         Validators.required,
         Validators.minLength(2),
         Validators.pattern('[0-9]{5}'),
-        
-    ]),
-      product_name: new FormControl("", 
-      [
-        Validators.required,
-        Validators.minLength(2),
-    ]),
-      product_price: new FormControl("", 
-      [
+      ]) 
+    ],
+      product_name: [this.inventoryService.inventory.productName, Validators.compose(
+        [
+          Validators.required,
+          Validators.minLength(2)]
+      )],
+      product_price: [this.inventoryService.inventory.productPrice, Validators.compose(
+        [
         Validators.required,
         Validators.minLength(1),
-        Validators.pattern('^\d+$||^\d+\.\d+$'),
-    ]),
-      product_desc: new FormControl("", 
-      [
-        Validators.required,
-        Validators.minLength(2),
-    ]),
-      created_date: new FormControl(new Date().toISOString().substring(0,10), [
-        Validators.required,
-    ])
+        Validators.pattern('^\d+$||^\d+\.\d+$')]
+        )]
+      ,
+      product_desc: [this.inventoryService.inventory.productDesc, 
+      Validators.compose(
+        [
+          Validators.required,
+          Validators.minLength(2),
+      ]
+      )],
+      created_date: [this.inventoryService.inventory.createdDate, 
+        Validators.compose([
+          Validators.required,
+      ])]
 
    });
 
@@ -62,7 +82,7 @@ export class UpdateInventoryFormComponent implements OnInit {
   }
 
   Update(data:any) {
-    
+    this.updateChange.emit(this.UpdateProduct)
     this.inventoryService.update(this.newProduct).subscribe(data => {
      
       console.log(this.newProduct)
@@ -73,6 +93,7 @@ export class UpdateInventoryFormComponent implements OnInit {
         productDesc: data.product_desc, 
         productPrice: data.product_price, 
         createdDate: data.created_date, }
+
         console.log("Update!!!")
     })
   }

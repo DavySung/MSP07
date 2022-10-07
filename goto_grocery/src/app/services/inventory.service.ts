@@ -9,6 +9,7 @@ import { ResponseDTO } from '../models/ResponseDTO';
     providedIn: 'root',
 })
 export class InventoryService {
+  inventory: ProductDTO;
     baseURL = environment.backendAPI + "/products";
 
     constructor(private http: HttpClient) { }
