@@ -17,6 +17,7 @@ import { UpdateTransactionFormComponent } from './components/shared/update-trans
 import { AddInventoryComponent } from './components/shared/add-inventory/add-inventory.component';
 import { CreateMemberFormComponent } from './components/shared/create-member-form/create-member-form.component';
 import { UpdateMemberFormComponent } from './components/shared/update-member-form/update-member-form.component';
+import { UpdateInventoryFormComponent } from './components/shared/update-inventory-form/update-inventory-form.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { UpdateMemberFormComponent } from './components/shared/update-member-for
     AddInventoryComponent,
     CreateMemberFormComponent,
     UpdateMemberFormComponent,
-    
+    UpdateInventoryFormComponent
   ],
   imports: [
     BrowserModule,
