@@ -12,8 +12,6 @@ import { ResponseDTO } from 'src/app/models/ResponseDTO';
 export class MembersComponent implements OnInit {
   currentMember: MemberDTO;
   memberList: MemberDTO[];
-  testMember1: MemberDTO;
-  testMember2: MemberDTO;
   isError: boolean;
   message: string;
 

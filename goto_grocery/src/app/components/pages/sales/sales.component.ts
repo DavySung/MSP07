@@ -44,14 +44,9 @@ export class SalesComponent implements OnInit {
 
   //get members to display
   getTransactions() {
-    //test data
-    // this.testTransaction1 = { id: 1, customer_number: '1', product_code: 'test1', transaction_date: "1/2", product_price: 123 }
-    // this.testTransaction2 = { id: 2, customer_number: '2', product_code: 'test2', transaction_date: "1/2", product_price: 123 }
-    // this.transactionList = [this.testTransaction1, this.testTransaction2]
     //this is use the actual api
     this.salesService.getTransactions().then(async (response) => {
-      this.transactionList = response.message;
-      // console.log(response)
+      this.transactionList = response.message.sort((a, b) => a.orderID - b.orderID)
     })
       .catch((err) => {
         console.log(err);
@@ -95,10 +90,10 @@ export class SalesComponent implements OnInit {
     this.getTransactions()
   }
 
-  confirmDelete() {
-    this.salesService.deleteTransactions(this.currentTransaction).then((response) => {
+  async confirmDelete() {
+    await this.salesService.deleteTransactions(this.currentTransaction).then(async (response) => {
       console.log(response)
-      this.actionResult = response.success
+      this.actionResult = response.message
       this.open(this.resultModal)
       this.getTransactions();
     })
@@ -106,6 +101,7 @@ export class SalesComponent implements OnInit {
         console.log(err);
         this.actionResult = "failed"
         this.open(this.resultModal)
+        this.getTransactions()
       });
   }
 

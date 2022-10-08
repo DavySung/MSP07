@@ -3,6 +3,12 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { SalesService } from 'src/app/services/sales.service';
 import { CreateTransactionDTO } from 'src/app/models/CreateTransactionDTO';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
+import { MemberService } from 'src/app/services/member.service';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { ProductDTO } from 'src/app/models/ProductDTO';
+import { MemberDTO } from 'src/app/models/MemberDTO';
+import { firstValueFrom } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-create-transaction-form',
@@ -16,6 +22,13 @@ export class CreateTransactionFormComponent implements OnInit {
   isError: boolean;
   errMsg: string;
   submitted: boolean;
+  message: string;
+  loaded: boolean = false;
+
+  currentproduct: ProductDTO;
+  productList: ProductDTO[];
+  currentMember: MemberDTO;
+  memberList: MemberDTO[];
 
   get customerNumber() {
     return this.form.get('customerNumber');
@@ -26,8 +39,8 @@ export class CreateTransactionFormComponent implements OnInit {
   get transactionDate() {
     return this.form.get('transactionDate');
   }
-  get productPriceID() {
-    return this.form.get('productPriceID');
+  get price() {
+    return this.form.get('price');
   }
   get orderID() {
     return this.form.get('orderID');
@@ -36,11 +49,29 @@ export class CreateTransactionFormComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private salesService: SalesService,
+    private inventoryService: InventoryService,
+    private memberService: MemberService,
   ) { }
 
   ngOnInit(): void {
-    this.setupForm();
+    this.getFormData();
   }
+
+  //get members to display
+  async getFormData() {
+    await this.memberService.getMembersDetails().then((response) => {
+      this.memberList = response;
+    })
+      .catch((err) => {
+        console.log(err);
+        this.isError = true;
+        this.message = err;
+      });
+
+    this.productList = await lastValueFrom(this.inventoryService.getAll())
+    this.setupForm()
+  }
+
   setupForm() {
     this.form = this.formBuilder.group(
       {
@@ -66,7 +97,7 @@ export class CreateTransactionFormComponent implements OnInit {
             Validators.required,
           ]),
         ],
-        productPriceID: [
+        price: [
           '',
           Validators.compose([
             Validators.required,
@@ -84,6 +115,7 @@ export class CreateTransactionFormComponent implements OnInit {
         ],
       }
     );
+    this.loaded = true;
   }
   async goBack() {
     this.exitForm.emit();

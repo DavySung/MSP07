@@ -4,6 +4,11 @@ import { SalesService } from 'src/app/services/sales.service';
 import { TransactionDTO } from 'src/app/models/TransactionDTO';
 import { formatDate } from '@angular/common';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
+import { MemberService } from 'src/app/services/member.service';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { ProductDTO } from 'src/app/models/ProductDTO';
+import { MemberDTO } from 'src/app/models/MemberDTO';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-update-transaction-form',
@@ -19,6 +24,15 @@ export class UpdateTransactionFormComponent implements OnInit {
   isError: boolean;
   errMsg: string;
   submitted: boolean;
+  message: string;
+
+  loaded: boolean = false;
+
+  currentproduct: ProductDTO;
+  productList: ProductDTO[];
+  currentMember: MemberDTO;
+  memberList: MemberDTO[];
+
 
   get customerNumber() {
     return this.form.get('customerNumber');
@@ -29,8 +43,8 @@ export class UpdateTransactionFormComponent implements OnInit {
   get transactionDate() {
     return this.form.get('transactionDate');
   }
-  get productPriceID() {
-    return this.form.get('productPriceID');
+  get price() {
+    return this.form.get('price');
   }
   get orderID() {
     return this.form.get('orderID');
@@ -39,10 +53,27 @@ export class UpdateTransactionFormComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private salesService: SalesService,
+    private inventoryService: InventoryService,
+    private memberService: MemberService,
   ) { }
 
   ngOnInit(): void {
-    this.setupForm();
+    this.getFormData();
+  }
+
+  //get members to display
+  async getFormData() {
+    await this.memberService.getMembersDetails().then((response) => {
+      this.memberList = response;
+    })
+      .catch((err) => {
+        console.log(err);
+        this.isError = true;
+        this.message = err;
+      });
+
+    this.productList = await lastValueFrom(this.inventoryService.getAll())
+    this.setupForm()
   }
 
   setupForm() {
@@ -70,8 +101,8 @@ export class UpdateTransactionFormComponent implements OnInit {
             Validators.required,
           ]),
         ],
-        productPriceID: [
-          this.transactionDTO.productPriceID,
+        price: [
+          this.transactionDTO.price,
           Validators.compose([
             Validators.required,
             Validators.minLength(1),
@@ -88,6 +119,7 @@ export class UpdateTransactionFormComponent implements OnInit {
         ],
       }
     );
+    this.loaded = true;
   }
 
   async goBack() {
@@ -98,9 +130,11 @@ export class UpdateTransactionFormComponent implements OnInit {
     this.submitted = true;
     let updatedForm = <TransactionDTO>this.form.value;
     updatedForm.id = this.transactionDTO.id;
+    console.log(updatedForm)
     await this.salesService.
       updateTransactions(updatedForm)
       .then((response) => {
+        console.log(response)
         this.response.emit(response)
         this.exitForm.emit();
       })

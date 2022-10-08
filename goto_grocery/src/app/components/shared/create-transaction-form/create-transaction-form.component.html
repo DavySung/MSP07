@@ -1,10 +1,16 @@
-<form (ngSubmit)="createTransaction()" [formGroup]="form">
+<form *ngIf="loaded" (ngSubmit)="createTransaction()" [formGroup]="form">
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Customer Number</label>
-                <input placeholder="" class="form-control" formControlName="customerNumber" type="text"
-                    [ngClass]="{'is-invalid': !customerNumber?.valid && (customerNumber?.dirty || customerNumber?.touched || submitted) }" />
+                <label class="control-label">Customer</label>
+                <select class="form-control" formControlName="customerNumber" id="customerNumber">
+                    <option value="" disabled selected>
+                        Please select customer
+                    </option>
+                    <option *ngFor="let member of memberList; let i = index" [value]="memberList[i].customerNumber">
+                        {{memberList[i].firstName}} {{memberList[i].lastName}}
+                    </option>
+                </select>
                 <small *ngIf="!customerNumber?.valid && (customerNumber?.dirty || submitted)"
                     class="text-danger validation-error-message">Customer Number is required</small>
             </div>
@@ -14,9 +20,15 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Product Code</label>
-                <input placeholder="" class="form-control" formControlName="productCode" type="text"
-                    [ngClass]="{ 'is-invalid': !productCode?.valid && (productCode?.dirty || productCode?.touched || submitted) }" />
+                <label class="control-label">Product</label>
+                <select name="productCode" class="form-control" formControlName="productCode" id="productCode">
+                    <option value="" disabled selected>
+                        Please select product
+                    </option>
+                    <option *ngFor="let product of productList; let i = index" [value]="productList[i].productCode">
+                        {{productList[i].productName}}
+                    </option>
+                </select>
                 <small *ngIf="!productCode?.valid && (productCode?.dirty || submitted)"
                     class="text-danger validation-error-message">Product Code
                     is required</small>
@@ -40,10 +52,10 @@
     <div class="row mb-3">
         <div class="col-12">
             <div class="form-group">
-                <label class="control-label">Product Price Id</label>
-                <input placeholder="" class="form-control" formControlName="productPriceID" type="number"
-                    [ngClass]="{ 'is-invalid': !productPriceID?.valid && (productPriceID?.dirty || productPriceID?.touched || submitted) }" />
-                <small *ngIf="!productPriceID?.valid && (productPriceID?.dirty || submitted)"
+                <label class="control-label">price</label>
+                <input placeholder="" class="form-control" formControlName="price" type="number"
+                    [ngClass]="{ 'is-invalid': !price?.valid && (price?.dirty || price?.touched || submitted) }" />
+                <small *ngIf="!price?.valid && (price?.dirty || submitted)"
                     class="text-danger validation-error-message">Product Code
                     is required</small>
             </div>

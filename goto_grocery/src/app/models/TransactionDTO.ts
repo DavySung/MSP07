@@ -3,6 +3,6 @@ export interface TransactionDTO {
     customerNumber: String;
     productCode: String;
     transactionDate: Date;
-    productPriceID: Number;
+    price: Number;
     orderID: Number;
 }

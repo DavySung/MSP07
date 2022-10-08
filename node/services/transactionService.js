@@ -22,24 +22,21 @@ exports.CreateTransactionAsync = async (req, res) => {
     } else {
         try {
             //checks if they exist in the DB first
-            // const product = await Product.findOne({ where: { productCode: req.body.productCode } })
-            // const member = await Member.findOne({ where: { customerNumber: req.body.customerNumber } })
-            // const productPrice = await ProductPrice.findOne({ where: { productCode: req.body.productCode } })
+            const product = await Product.findOne({ where: { productCode: req.body.productCode } })
+            const member = await Member.findOne({ where: { customerNumber: req.body.customerNumber } })
+
             await Transaction.create({
-                customerNumber: req.body.customerNumber,
-                // customerNumber: member.customerNumber,
-                // productCode: product.productCode,
-                productCode: req.body.productCode,
+                customerNumber: member.customerNumber,
+                productCode: product.productCode,
                 transactionDate: req.body.transactionDate,
-                // productPriceID: productPrice.productCode,
-                productPriceID: req.body.productPriceID,
+                price: req.body.price,
                 orderID: req.body.orderID
             })
             return { message: "transaction created", result: true };
         }
         catch (error) {
             console.log(`Error: ${error}`);
-            return { message: error, result: false };
+            return { message: error.message, result: false };
         }
     }
 }
@@ -50,18 +47,14 @@ exports.UpdateTransactionAsync = async (req, res) => {
     } else {
         try {
             //checks if they exist in the DB first
-            // const product = await Product.findOne({ where: { productCode: req.body.productCode } })
-            // const member = await Member.findOne({ where: { customerNumber: req.body.customerNumber } })
-            // const productPrice = await ProductPrice.findOne({ where: { id: req.body.productPriceID } })
+            const product = await Product.findOne({ where: { productCode: req.body.productCode } })
+            const member = await Member.findOne({ where: { customerNumber: req.body.customerNumber } })
 
             await Transaction.update({
-                customerNumber: req.body.customerNumber,
-                // customerNumber: member.customerNumber,
-                // productCode: product.productCode,
-                productCode: req.body.productCode,
+                customerNumber: member.customerNumber,
+                productCode: product.productCode,
                 transactionDate: req.body.transactionDate,
-                // productPriceID: productPrice.productCode,
-                productPriceID: req.body.productPriceID,
+                price: req.body.price,
                 orderID: req.body.orderID
             }, {
                 where: {
@@ -72,7 +65,7 @@ exports.UpdateTransactionAsync = async (req, res) => {
         }
         catch (error) {
             console.log(`Error: ${error}`);
-            return { message: error, result: false };
+            return { message: error.message, result: false };
         }
     }
 }
@@ -81,13 +74,17 @@ exports.DeleteTransactionAsync = async (req, res) => {
     if (!req) {
         return { message: "no body recieved", result: false };
     } else {
-        await Transaction.destroy({
-            where: {
-                id: req.id
-            }
-        }).then(async (result) => {
-            console.log(result);
+        try {
+            await Transaction.destroy({
+                where: {
+                    id: req.body.id
+                }
+            })
             return { message: "transaction deleted", result: true };
-        })
+        }
+        catch (error) {
+            console.log(`Error: ${error}`);
+            return { message: error.message, result: false };
+        }
     }
 }
