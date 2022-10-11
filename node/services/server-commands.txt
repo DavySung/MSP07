@@ -1,0 +1,8 @@
+# Start node server
+MSP07/node/ npm start
+
+# Start express server
+MSP07/goto_grocery 
+
+# Notes
+alias ng="/Users/<user_name>/.npm-global/bin/ng"

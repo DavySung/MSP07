@@ -1,3 +1,5 @@
+const { timeStamp } = require('console');
+const { now } = require('sequelize/types/utils');
 const db = require('../models')
 const Product = db.Product
 
@@ -19,7 +21,7 @@ exports.CreateProductAsync = async (req, res) => {
       try {
           await Product.create({
               productCode: req.body.productCode,
-              productName: req.body.productName,
+              productName: req.body.productName.toLowerCase(),
               productDesc: req.body.productDesc,
               //createdDate: req.body.createdDate
           })
@@ -40,8 +42,7 @@ exports.UpdateProductAsync = async (req, res) => {
           await Product.update({
               productCode: req.body.productCode,
               productName: req.body.productName,
-              productDesc: req.body.productDesc,
-              //createdDate: req.body.createdDate
+              productDesc: req.body.productDesc
           }, {
             where: {
               id: req.body.id
