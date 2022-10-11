@@ -2,19 +2,12 @@ const db = require('../models')
 const Product = db.Product
 
 exports.GetProductsAsync = async (req, res) => {
-  try{
-    return { message: await Product.findAll(), result: true };
-  }
-  catch (error) {  
-    console.log(`Error: ${error}`);
-    return { message: error, result: false };
-  }
-  
+  return await Product.findAll();
 }
 
 exports.CreateProductAsync = async (req, res) => {
   if (!req) {
-      return {message: "No form input recieved", result: false};
+      return false;
   } else {
       try {
           await Product.create({
@@ -23,11 +16,11 @@ exports.CreateProductAsync = async (req, res) => {
               productDesc: req.body.productDesc,
               //createdDate: req.body.createdDate
           })
-          return {message: "Product added to database", result: true};
+          return true;
       }
       catch (error) {
           console.log(`Error: ${error}`);
-          return { message: error.message, result: false };
+          return false;
       }
   }
 }
