@@ -3,6 +3,8 @@ const Members = db.Member
 
 //from productService.js
 function titleCase(str) {
+  if(!str)
+    return;
   str = str.toLowerCase().split(' ');
   for (var i = 0; i < str.length; i++) {
     str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
@@ -35,7 +37,7 @@ exports.CreateMemberAsync = async (req, res) => {
         addressSuburb: titleCase(req.body.addressSuburb),
         addressState: req.body.addressState.toUpperCase(),
         addressPostcode: req.body.addressPostcode,
-        accountActiveIndicator: req.body.accountActiveIndicator
+        accountActiveIndicator: req.body.accountActiveIndicator ? req.body.accountActiveIndicator : true
       }).then(member => {
         Members.update({
           //take the autoincremented (on the serverside) id number and add a random customer number to that
@@ -73,7 +75,7 @@ exports.UpdateMemberAsync = async (req, res) => {
         addressSuburb: titleCase(req.body.addressSuburb),
         addressState: req.body.addressState.toUpperCase(),
         addressPostcode: req.body.addressPostcode,
-        accountActiveIndicator: req.body.accountActiveIndicator         
+        accountActiveIndicator: req.body.accountActiveIndicator ? req.body.accountActiveIndicator : true
       }, {
         where: {
           id: req.body.id
