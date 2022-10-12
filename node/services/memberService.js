@@ -2,31 +2,12 @@ const db = require('../models')
 const Members = db.Member
 
 exports.GetMembersAsync = async (req, res) => {
-  return await Members.findAll();
-}
-
-//http://emailregex.com/
-let emailRegex =  	
-/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-//Rob: I made these ones up on the spot so they wont be perfect by any stretch
-let phoneRegex = /^\d{10}$/;
-let addressFirstLineRegex = /^\d+\ .*$/;
-//Internet suggests that postcodes may also come in 3 digit form (with a leading 0 omitted), not going to cover this case for now
-let addressPostcodeRegex = /^\d{4}$/
-
-function validateMember(member) {
-  //firstname and lastname just need to be not null, this could be handled on the database side
-  if(!emailRegex.test(member.email))
-    return "Invalid email address";
-  if(!phoneRegex.test(member.phone))
-    return "Invalid phone number";
-  if(!addressFirstLineRegex.test(member.addressFirstLine))
-    return "Invalid address";
-  if(!addressPostcodeRegex.test(member.addressPostcode))
-    return "Invalid postcode";
-
-  return "OK";
+  try {
+    return { message: await Members.findAll(), result: true};
+  } catch(error) {
+     console.log(`Error: ${error}`);
+    return { message: error, result: false };
+  }
 }
 
 exports.CreateMemberAsync = async (req, res) => {
@@ -34,7 +15,7 @@ exports.CreateMemberAsync = async (req, res) => {
     return false;
   } else {
     try {
-      let member = {
+      await Members.create({
         customerNumber: "",
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -46,11 +27,7 @@ exports.CreateMemberAsync = async (req, res) => {
         addressState: req.body.addressState,
         addressPostcode: req.body.addressPostcode,
         accountActiveIndicator: req.body.accountActiveIndicator
-      }
-      let valid = validateMember(member);
-      if(valid !== "OK")
-        throw(valid)
-      await Members.create(member).then(member => {
+      }).then(member => {
         Members.update({
           //take the autoincremented (on the serverside) id number and add a random customer number to that
           //ensures both security and uniqueness
@@ -61,11 +38,11 @@ exports.CreateMemberAsync = async (req, res) => {
           }
         })
       })
-      return true;
+      return { message: "member created", result: true }
     }
     catch (error) {
       console.log(`Error: ${error}`);
-      throw(error);
+      return { message: error.message, result: false };
     }
   }
 }
@@ -75,7 +52,7 @@ exports.UpdateMemberAsync = async (req, res) => {
     return false;
   } else {
     try {
-      let member = {
+      await Members.update({
         //should customerNumber be allowed to be updated?
         customerNumber: req.body.customerNumber,
         firstName: req.body.firstName,
@@ -88,20 +65,16 @@ exports.UpdateMemberAsync = async (req, res) => {
         addressState: req.body.addressState,
         addressPostcode: req.body.addressPostcode,
         accountActiveIndicator: req.body.accountActiveIndicator
-      }
-      let valid = validateMember(member);
-      if(valid !== "OK")
-        throw(valid)
-      await Members.update(member, {
+      }, {
         where: {
           id: req.body.id
         }
       })
-      return true;
+      return { message: "member updated", result: true };
     }
     catch (error) {
       console.log(`Error: ${error}`);
-      return false;
+      return { message: error.message, result: false };
     }
   }
 }
@@ -109,7 +82,7 @@ exports.UpdateMemberAsync = async (req, res) => {
 //this will always return true, despite not deleting anything
 exports.DeleteMemberAsync = async (req, res) => {
   if (!req) {
-    return false;
+    return { message: "no body recieved", result: false };
   } else {
     try {
       await Members.destroy({
@@ -117,11 +90,11 @@ exports.DeleteMemberAsync = async (req, res) => {
           id: req.body.id
         }
       })
-      return true;
+      return { message: "member deleted", result: true};
     }
     catch (error) {
       console.log(`Error: ${error}`);
-      return false;
+      return { message: error.message, result: false };
     }
   }
 }
