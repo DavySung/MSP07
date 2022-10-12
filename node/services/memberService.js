@@ -1,6 +1,15 @@
 const db = require('../models')
 const Members = db.Member
 
+//from productService.js
+function titleCase(str) {
+  str = str.toLowerCase().split(' ');
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
+  }
+  return str.join(' ');
+}
+
 exports.GetMembersAsync = async (req, res) => {
   try {
     return { message: await Members.findAll(), result: true};
@@ -17,14 +26,14 @@ exports.CreateMemberAsync = async (req, res) => {
     try {
       await Members.create({
         customerNumber: "",
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        firstName: titleCase(req.body.firstName),
+        lastName: titleCase(req.body.lastName),
         email: req.body.email,
         phone: req.body.phone,
-        addressFirstLine: req.body.addressFirstLine,
-        addressSecondLine: req.body.addressSecondLine,
-        addressSuburb: req.body.addressSuburb,
-        addressState: req.body.addressState,
+        addressFirstLine: titleCase(req.body.addressFirstLine),
+        addressSecondLine: titleCase(req.body.addressSecondLine),
+        addressSuburb: titleCase(req.body.addressSuburb),
+        addressState: req.body.addressState.toUpperCase(),
         addressPostcode: req.body.addressPostcode,
         accountActiveIndicator: req.body.accountActiveIndicator
       }).then(member => {
@@ -55,16 +64,16 @@ exports.UpdateMemberAsync = async (req, res) => {
       await Members.update({
         //should customerNumber be allowed to be updated?
         customerNumber: req.body.customerNumber,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        firstName: titleCase(req.body.firstName),
+        lastName: titleCase(req.body.lastName),
         email: req.body.email,
         phone: req.body.phone,
-        addressFirstLine: req.body.addressFirstLine,
-        addressSecondLine: req.body.addressSecondLine,
-        addressSuburb: req.body.addressSuburb,
-        addressState: req.body.addressState,
+        addressFirstLine: titleCase(req.body.addressFirstLine),
+        addressSecondLine: titleCase(req.body.addressSecondLine),
+        addressSuburb: titleCase(req.body.addressSuburb),
+        addressState: req.body.addressState.toUpperCase(),
         addressPostcode: req.body.addressPostcode,
-        accountActiveIndicator: req.body.accountActiveIndicator
+        accountActiveIndicator: req.body.accountActiveIndicator         
       }, {
         where: {
           id: req.body.id
