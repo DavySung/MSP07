@@ -38,12 +38,6 @@ export class AddInventoryComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
     ]),
-      product_price: new FormControl("", 
-      [
-        Validators.required,
-        Validators.minLength(1),
-        Validators.pattern('^\d+$||^\d+\.\d+$'),
-    ]),
       product_desc: new FormControl("", 
       [
         Validators.required,
@@ -67,7 +61,6 @@ export class AddInventoryComponent implements OnInit {
       productCode: data.product_code, 
       productName: data.product_name, 
       productDesc: data.product_desc, 
-      productPrice: data.product_price, 
       createdDate: data.created_date, 
     }
     this.inventoryService.create(this.newProduct).subscribe((response)=>{

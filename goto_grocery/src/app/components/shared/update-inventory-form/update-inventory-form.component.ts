@@ -61,15 +61,6 @@ export class UpdateInventoryFormComponent implements OnInit {
               Validators.minLength(2)
             ]
           )],
-        product_price: [
-          this.inventoryService.inventory.productPrice,
-          Validators.compose(
-            [
-              Validators.required,
-              Validators.minLength(1),
-              Validators.pattern('^\d+$||^\d+\.\d+$')
-            ])
-        ],
         product_desc: [
           this.inventoryService.inventory.productDesc,
           Validators.compose([
@@ -93,12 +84,11 @@ export class UpdateInventoryFormComponent implements OnInit {
 
       console.log(this.newProduct)
       this.newProduct = {
-        id: 1,
-        productCode: data.product_code,
-        productName: data.product_name,
-        productDesc: data.product_desc,
-        productPrice: data.product_price,
-        createdDate: data.created_date,
+        id: data.message.id,
+        productCode: data.message.product_code,
+        productName: data.message.product_name,
+        productDesc: data.message.roduct_desc,
+        createdDate: data.message.created_date,
       }
 
       console.log("Update!!!")

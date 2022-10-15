@@ -3,6 +3,5 @@ export interface ProductDTO {
     productCode: string,
     productName: string;
     productDesc: string;
-    productPrice: string;
     createdDate: string;
 }
