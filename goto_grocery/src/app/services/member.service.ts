@@ -17,7 +17,7 @@ export class MemberService {
     //will return all the members from backend
     async getMembersDetails() {
         return await firstValueFrom(
-            this.http.get<MemberDTO[]>(`${this.baseURL}/members/get`)
+            this.http.get<any>(`${this.baseURL}/members/get`)
         );
     }
 

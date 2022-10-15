@@ -14,8 +14,8 @@ export class InventoryService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<ProductDTO[]> {
-    return this.http.get<ProductDTO[]>(this.baseURL + "/get");
+  getAll(): Observable<any> {
+    return this.http.get<any>(this.baseURL + "/get");
   }
 
   get(product: ProductDTO): Observable<any> {

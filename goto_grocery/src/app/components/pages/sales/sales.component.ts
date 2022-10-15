@@ -3,6 +3,10 @@ import { TransactionDTO } from 'src/app/models/TransactionDTO';
 import { SalesService } from 'src/app/services/sales.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ResponseDTO } from 'src/app/models/ResponseDTO';
+import * as FileSaver from 'file-saver';
+import { saveAs } from 'file-saver';
+import { AngularCsv } from 'angular-csv-ext/dist/Angular-csv';
+
 
 @Component({
   selector: 'app-sales',
@@ -105,6 +109,11 @@ export class SalesComponent implements OnInit {
       });
   }
 
+  exportExcel() {
+    new AngularCsv(this.transactionList, 'SalesReport');
+  }
+
+
   exitForm() {
     this.createTransaction = false;
     this.updateTransaction = false;
@@ -127,5 +136,7 @@ export class SalesComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
+
+
 
 }

@@ -3,6 +3,7 @@ const express = require("express");
 const port = process.env.PORT || 3000;
 const bodyParser = require("body-parser");
 const memberRoutes = require('./routes/memberRoutes.js')
+const authRoutes = require('./routes/authenticateRoutes.js')
 const transactionRoutes = require('./routes/transactionRoutes.js')
 const productRoutes = require('./routes/productRoutes.js')
 const productPriceRoutes = require('./routes/productPriceRoutes.js')
@@ -27,6 +28,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use('/api/authenticate', authRoutes);
 app.use('/api/members', memberRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/products', productRoutes)

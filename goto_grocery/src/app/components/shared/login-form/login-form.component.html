@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col mx-auto">
+        <ng-container *ngIf="isError">
+            <div class="alert alert-danger mb-3 p-3 text-center w-100" role="alert">
+                {{errMsg}}
+                <!-- <span *ngIf="accountLocked"><br>Please <a class="link-primary"
+                        style="cursor: pointer; text-decoration: none;" (click)="open(forgotPassword)">reset</a> your
+                    password or try again in 20 minutes
+                </span> -->
+            </div>
+        </ng-container>
+        <form (ngSubmit)="login()" [formGroup]="form">
+            <div class="form-group mb-4">
+                <label for="username">User Name</label>
+                <input formControlName="username" class="form-control" placeholder="" type="text" />
+            </div>
+            <div class="form-group mb-4">
+                <label for="password">Password</label>
+                <input formControlName="password" class="form-control" placeholder="" type="password" />
+            </div>
+            <button *ngIf="!submitting" [disabled]="!form.valid" type="submit" class="btn btn-dark w-100">Log
+                in</button>
+            <button *ngIf="submitting" class="btn btn-dark w-100" type="button" disabled>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Logging in...
+            </button>
+        </form>
+        <!-- <p class="password-link" style="cursor: pointer;">
+            <a (click)="open(forgotPassword)"><img src="assets/images/lock.svg" class="d-inline-block me-1" /> Forgot
+                your password?</a>
+        </p> -->
+    </div>
+</div>
+<!-- no forgot password for admin portal potential hack, but if needed -->
+<!-- <ng-template #forgotPassword let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Reset Password</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-forgot-password-form></app-forgot-password-form>
+    </div>
+</ng-template> -->

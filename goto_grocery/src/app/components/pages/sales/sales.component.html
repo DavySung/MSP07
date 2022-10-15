@@ -7,7 +7,7 @@
                         Sales
                     </h2>
                 </div>
-                <div>
+                <div class="row d-flex">
                     <button (click)="addTransaction()" class="btn btn-primary my-auto me-auto">
                         Add
                     </button>
@@ -38,6 +38,12 @@
                 </div>
             </div>
         </div>
+        <div class="text-center">
+            <button (click)="exportExcel()" class="btn btn-success my-auto me-auto">
+                Download Data
+            </button>
+        </div>
+
     </ng-container>
     <ng-container *ngIf="createTransaction">
 

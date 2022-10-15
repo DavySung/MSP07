@@ -60,7 +60,7 @@ export class CreateTransactionFormComponent implements OnInit {
   //get members to display
   async getFormData() {
     await this.memberService.getMembersDetails().then((response) => {
-      this.memberList = response;
+      this.memberList = response.message;
     })
       .catch((err) => {
         console.log(err);
@@ -68,7 +68,7 @@ export class CreateTransactionFormComponent implements OnInit {
         this.message = err;
       });
 
-    this.productList = await lastValueFrom(this.inventoryService.getAll())
+    this.productList = await (await lastValueFrom(this.inventoryService.getAll())).message
     this.setupForm()
   }
 
