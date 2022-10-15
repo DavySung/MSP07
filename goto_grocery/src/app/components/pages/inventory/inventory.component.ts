@@ -51,7 +51,7 @@ export class InventoryComponent implements OnInit {
   GetInventory(){
     this.inventoryService.getAll().subscribe(data => {
       console.log("All Product", data);
-      this.productList = data;
+      this.productList = data.message
     })
   }
 
