@@ -43,7 +43,7 @@ export class MembersComponent implements OnInit {
   //get members to display
   getMembers() {
     this.memberService.getMembersDetails().then((response) => {
-      this.memberList = response;
+      this.memberList = response.message;
     })
       .catch((err) => {
         console.log(err);
