@@ -18,16 +18,12 @@ export class InventoryService {
     return this.http.get<any>(this.baseURL + "/get");
   }
 
-  get(product: ProductDTO): Observable<any> {
-    return this.http.get(`${this.baseURL}/${product.id}`);
-  }
-
   create(product: ProductDTO): Observable<any> {
     return this.http.post(this.baseURL + "/create", product);
   }
 
   update(product: ProductDTO): Observable<any> {
-    return this.http.put(`${this.baseURL}/update/${product.id}`, product);
+    return this.http.post<any>(this.baseURL + "/update", product);
   }
 
   delete(product: ProductDTO): Observable<any> {

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { ProductDTO } from 'src/app/models/ProductDTO';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-update-inventory-form',
   templateUrl: './update-inventory-form.component.html',
@@ -11,13 +11,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class UpdateInventoryFormComponent implements OnInit {
 
-  newProduct: ProductDTO;
   form: FormGroup;
-  // updateForm: any;
   submitted: boolean = false;
 
-  @Input() UpdateProduct: ProductDTO;
-  @Output() updateChange: EventEmitter<ProductDTO> = new EventEmitter<ProductDTO>();
   get productCode() {
     return this.form.get('productCode');
   }
@@ -29,7 +25,7 @@ export class UpdateInventoryFormComponent implements OnInit {
     this.inventoryService.inventory = value;
   }
 
-  constructor(public formBuilder: FormBuilder, public inventoryService: InventoryService) {
+  constructor(public formBuilder: FormBuilder, public inventoryService: InventoryService, private router: Router) {
 
   }
 
@@ -41,60 +37,49 @@ export class UpdateInventoryFormComponent implements OnInit {
 
 
   LoadForm() {
-    this.form = this.formBuilder.group(
-      {
-        productCode: [
-          this.inventoryService.inventory.productCode,
-          Validators.compose([
-
-            Validators.required,
-            Validators.minLength(2),
-            Validators.pattern('[0-9]{5}')
-          ]),
-        ]
-        ,
-        product_name: [
-          this.inventoryService.inventory.productName,
-          Validators.compose(
-            [
+    try{
+      this.form = this.formBuilder.group(
+        {
+          productCode: [
+            this.inventoryService.inventory.productCode,
+            Validators.compose([
+  
               Validators.required,
-              Validators.minLength(2)
-            ]
-          )],
-        product_desc: [
-          this.inventoryService.inventory.productDesc,
-          Validators.compose([
-            Validators.required,
-            Validators.minLength(2),
-          ])
-        ],
-        created_date: [
-          this.inventoryService.inventory.createdDate,
-          Validators.compose([
-            Validators.required,
-          ])
-        ]
-      }
-    );
+              Validators.minLength(2),
+              Validators.pattern('[0-9]{5}')
+            ]),
+          ]
+          ,
+          productName: [
+            this.inventoryService.inventory.productName,
+            Validators.compose(
+              [
+                Validators.required,
+                Validators.minLength(2)
+              ]
+            )],
+          productDesc: [
+            this.inventoryService.inventory.productDesc,
+            Validators.compose([
+              Validators.required,
+              Validators.minLength(2),
+            ])
+          ],
+        }
+      );
+    }catch{
+      this.router.navigate(['Inventory']);
+    }
+    
   }
 
-  Update(data: any) {
-    this.updateChange.emit(this.UpdateProduct)
-    this.inventoryService.update(this.newProduct).subscribe(data => {
-
-      console.log(this.newProduct)
-      this.newProduct = {
-        id: data.message.id,
-        productCode: data.message.product_code,
-        productName: data.message.product_name,
-        productDesc: data.message.roduct_desc,
-        createdDate: data.message.created_date,
-      }
-
+  Update(newNp: any) {
+    newNp.id = this.inventoryService.inventory.id
+    console.log(newNp);
+    this.inventoryService.update(newNp).subscribe(data => {
       console.log("Update!!!")
     })
+    this.router.navigate(['/Inventory']);
   }
-
-
 
 }

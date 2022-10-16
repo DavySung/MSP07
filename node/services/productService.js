@@ -37,7 +37,7 @@ exports.CreateProductAsync = async (req, res) => {
               productCode: req.body.productCode,
               productName: titleCase(req.body.productName),
               productDesc: sentenceCase(req.body.productDesc),
-              //createdDate: req.body.createdDate
+              createdAt: req.body.createdDate
           })
           return {message: "Product added to database", result: true};
       }
@@ -49,6 +49,7 @@ exports.CreateProductAsync = async (req, res) => {
 }
 
 exports.UpdateProductAsync = async (req, res) => {
+  console.log("Service")
   if (!req) {
       return false;
   } else {

@@ -43,9 +43,6 @@ export class AddInventoryComponent implements OnInit {
         Validators.required,
         Validators.minLength(2),
     ]),
-      created_date: new FormControl(new Date().toISOString().substring(0,10), [
-        Validators.required,
-    ])
 
    });
 
@@ -61,7 +58,6 @@ export class AddInventoryComponent implements OnInit {
       productCode: data.product_code, 
       productName: data.product_name, 
       productDesc: data.product_desc, 
-      createdDate: data.created_date, 
     }
     this.inventoryService.create(this.newProduct).subscribe((response)=>{
      

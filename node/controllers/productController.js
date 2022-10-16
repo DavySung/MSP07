@@ -24,6 +24,7 @@ exports.deleteProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
     try {
+        console.log("Controller")
         return res.status(200).send(await productService.UpdateProductAsync(req, res))
     } catch (error) {
         return res.status(500).send({

@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
 export class InventoryComponent implements OnInit {
   productList: ProductDTO[];
   product: ProductDTO;
-  UpdateProduct: ProductDTO;
- // productPrice: ProductPriceDTO;
   isError: boolean;
   message: string;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -32,22 +30,6 @@ export class InventoryComponent implements OnInit {
     this.GetInventory();
   }
 
-  // GetInvetory() {
-  //   //test data
-  //   this.testProtuct1 = { id: 1, product_code: "12", product_name: "test1", product_desc: "test1", product_price: "123", created_date: "1/1/1" }
-  //   this.testProtuct2 = { id: 2, product_code: "435", product_name: "test2", product_desc: "test2", product_price: "123", created_date: "1/1/1" }
-  //   this.productList = [this.testProtuct1, this.testProtuct2]
-
-  //   //this is use the actual api
-  //   // this.productService.inventoryService().then((response) => {
-  //   //   this.memberList = response;
-  //   // })
-  //   // .catch((err) => {
-  //   //   console.log(err);
-  //   //   this.isError = true;
-  //   //   this.message = err;
-  //   // });
-  // }
   GetInventory(){
     this.inventoryService.getAll().subscribe(data => {
       console.log("All Product", data);
